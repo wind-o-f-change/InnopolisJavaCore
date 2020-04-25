@@ -4,7 +4,7 @@ package part1.lesson01.task02;
  * Create 23.04.2020
  * @autor Evtushenko Anton
  *
- * This method prints to the console information about the coincidence of numbers and their square roots
+ * This class prints to the console information about the coincidence of numbers and their square roots
  */
 
 public class RandomNumGeneration {
