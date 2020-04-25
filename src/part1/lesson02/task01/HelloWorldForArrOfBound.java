@@ -1,4 +1,4 @@
-package part1.lesson01.task01;
+package part1.lesson02.task01;
 
 /**
  * Create 23.04.2020

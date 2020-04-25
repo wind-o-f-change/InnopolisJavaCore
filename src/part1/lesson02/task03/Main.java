@@ -1,6 +1,6 @@
-package part1.lesson01.task03;
+package part1.lesson02.task03;
 
-import part1.lesson01.task01.MainErrExceptions;
+import part1.lesson02.task01.MainErrExceptions;
 
 import java.util.Arrays;
 import java.util.Comparator;

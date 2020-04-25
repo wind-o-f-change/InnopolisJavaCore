@@ -1,4 +1,4 @@
-package part1.lesson01.task03;
+package part1.lesson02.task03;
 
 import java.util.Comparator;
 
