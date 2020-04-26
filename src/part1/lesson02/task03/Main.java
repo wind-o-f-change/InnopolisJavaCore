@@ -22,6 +22,7 @@ public class Main {
 
         Person[] people = Person.getPersonArray(10001);
         runTask(people, persNameComp, persAgeComp, persCompAgeName, persCompNameAge);
+//        Arrays.asList(Person.getPersonArray(10001)).forEach(System.out::println);
     }
 
     /**

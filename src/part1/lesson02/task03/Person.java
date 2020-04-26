@@ -36,8 +36,6 @@ public class Person {
 
         Object[] objects = people1.toArray();
 
-//        Person[] humans = (Person[]) objects; // будет ClassCastException, но почему еще не разобрался...
-//        return humans;
         return objects;
     }
 
