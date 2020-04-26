@@ -22,7 +22,6 @@ public class Main {
 
         Person[] people = Person.getPersonArray(10001);
         runTask(people, persNameComp, persAgeComp, persCompAgeName, persCompNameAge);
-//        Arrays.asList(Person.getPersonArray(10001)).forEach(System.out::println);
     }
 
     /**
@@ -61,4 +60,5 @@ public class Main {
         System.out.printf("Время работы сортировщика №4 составило %d мс.\n",
                  (endNA.getTime() - startNA.getTime()));
     }
+    private Main(){}
 }
