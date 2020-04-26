@@ -59,7 +59,7 @@ public class Person {
 //        humans[0] = new Person("Alex", Sex.getMAN(), 20); //This for test*
 //        humans[1] = new Person("Alex", Sex.getMAN(), 20);
 
-        //Cycle generate  of a Person[numCharset]
+        //Cycle generate  of a Person[quantityObjIntoArr]
 //        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
         for (int i = 0; i < quantityObjIntoArr; i++) {
             numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
@@ -71,8 +71,7 @@ public class Person {
                 char c = chars[(int) ((chars.length - 2) * Math.random() + 1)];
                 if (j == 0) {
                     namePerson.append(String.valueOf(c).toUpperCase());
-                }
-                namePerson.append(c);
+                }else namePerson.append(c);
             }
 
             // assigning a random gender
