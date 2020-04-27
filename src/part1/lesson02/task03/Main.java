@@ -20,8 +20,7 @@ public class Main {
         Comparator persCompAgeName = new SortedByAge().thenComparing(new SortedByName());
         Comparator persCompNameAge = new SortedByName().thenComparing(new SortedByAge());
 
-        Person[] people = Person.getPersonArray(10001);
-        runTask(people, persNameComp, persAgeComp, persCompAgeName, persCompNameAge);
+        runTask(Person.getPersonArray(10001), persNameComp, persAgeComp, persCompAgeName, persCompNameAge);
     }
 
     /**
@@ -34,22 +33,31 @@ public class Main {
      * @throws MainErrExceptions
      */
     public static void runTask(Person[] p, Comparator c1, Comparator c2, Comparator c3, Comparator c4) {
+        System.out.println("\nСписок сортированный правилом №1\n");
 
         Date startA = new Date();
         Arrays.asList(Person.sortPersonArray(p, c2)).forEach(System.out::println);
         Date endA = new Date();
 
+        System.out.println("\nСписок сортированный правилом №2\n");
+
         Date startN = new Date();
         Arrays.asList(Person.sortPersonArray(p, c1)).forEach(System.out::println);
         Date endN = new Date();
+
+        System.out.println("\nСписок сортированный правилом №3\n");
 
         Date startAN = new Date();
         Arrays.asList(Person.sortPersonArray(p, c3)).forEach(System.out::println);
         Date endAN = new Date();
 
+        System.out.println("\nСписок сортированный правилом №4\n");
+
         Date startNA = new Date();
         Arrays.asList(Person.sortPersonArray(p, c4)).forEach(System.out::println);
         Date endNA = new Date();
+
+        System.out.println();
 
         System.out.printf("Время работы сортировщика №1 составило %d мс.\n",
                 (endA.getTime() - startA.getTime()));

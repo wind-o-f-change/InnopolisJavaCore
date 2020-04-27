@@ -30,13 +30,11 @@ public class Person {
      * @return - sorted a Person[]
      */
     public static Object[] sortPersonArray(Person[] people, Comparator personComparator) {
-
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));
 
-        Object[] objects = people1.toArray();
-
-        return objects;
+        Person[] humans = people1.toArray(Person[]::new);
+        return humans;
     }
 
     /**
