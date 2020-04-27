@@ -53,7 +53,7 @@ public class Person {
         String sex;
         Person[] humans = new Person[quantityObjIntoArr];
 //        humans[0] = new Person("Alex", Sex.getMAN(), 20); //This for test*
-//        humans[1] = new Person("Alex", Sex.getMAN(), 20);
+//        humans[1] = new Person("Alex", Sex.getMAN(), 20); //
 
         //Cycle generate  of a Person[quantityObjIntoArr]
 //        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
