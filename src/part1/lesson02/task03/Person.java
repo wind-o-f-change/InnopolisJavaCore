@@ -29,7 +29,7 @@ public class Person {
      *
      * @return - sorted a Person[]
      */
-    public static Object[] sortPersonArray(Person[] people, Comparator personComparator) {
+    public static Person[] sortPersonArray(Person[] people, Comparator personComparator) {
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));
 
