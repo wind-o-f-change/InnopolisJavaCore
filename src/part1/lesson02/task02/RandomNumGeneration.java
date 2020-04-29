@@ -21,6 +21,7 @@ public class RandomNumGeneration {
 
         int numCycle = (int) (9 * Math.random()); // Generation "N" random numbers //(сколько должно быть чисел)
 
+        // переменный лучше объявлять как можно ближе к их использованию. Вне цикла они не нужны
         int k;                                    // parameter numbers for the "intsK" array
         int q;                                    // parameter square root from numbers for the "intsQ" array
 
@@ -32,8 +33,10 @@ public class RandomNumGeneration {
             int indexArr = (int) (genNumCycle.length * Math.random() - 1);
             if (indexArr < 0) indexArr = 0;
 
+            // чем не устроил Random.nextInt()? :)
             k = genNumCycle[indexArr]; // selecting a random number from the "genNumCycle" array
 
+            // думайте об информативности, не лишним будет вывести само число
             if (k < 0)
                 throw new MyNegativeNumberException("Negative numbers are not allowed!!");       // Exception if "k" is negative
 
@@ -48,6 +51,8 @@ public class RandomNumGeneration {
         for (int i = 0; i < numCycle; i++) {
             q = intsQ[i];
 
+            // речь шла не о том, чтобы найти среди k равное q, а чтобы вывести такие q, квадрат целой части, которых равен k, из которого они получились
+            // например 9 и 3 подходят под это условие, а 5 и 2 с лишним нет.
             for (int j = 0; j < numCycle; j++) {
 //                System.out.printf("q = %d, k = %d\n", q, intsK[j]);               //It's for you to test watch
                 if (q == intsK[j]) System.out.println("a match is found: " + q);

@@ -32,6 +32,8 @@ public class Main {
      * @param c4 - comparator for sorting an array of the Person class.
      * @throws MainErrExceptions
      */
+    // если функция принимает больше 2-3 аргумента это повод задуматься о рефакторинге,
+    // в нашем случае можно подумать о функции принимающей массив и конкретный Comparator
     public static void runTask(Person[] p, Comparator c1, Comparator c2, Comparator c3, Comparator c4) {
         System.out.println("\nСписок сортированный правилом №1\n");
 

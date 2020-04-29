@@ -11,10 +11,12 @@ import java.util.*;
  */
 
 public class Person {
+    // опять же будьте последовательны. Почему одно поле final, а два других нет - несправедливость :)
     private String name;
     private final String sex;
     private int age;
 
+    // staticStringManOrWoman - суровое название аргумента :)
     public Person(String name, String staticStringManOrWoman, int age) {
         this.name = name;
         this.sex = staticStringManOrWoman;
@@ -29,10 +31,14 @@ public class Person {
      *
      * @return - sorted a Person[]
      */
+    // статические методы - зло :) На самом деле нет ни одной хорошей причины, чтобы этот метод был здесь
+    // он только перегружает класс Person
     public static Person[] sortPersonArray(Person[] people, Comparator personComparator) {
+        // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));
 
+        // это не так работает :) в аргумент toArray нужно передавать массив
         Person[] humans = people1.toArray(Person[]::new);
         return humans;
     }
@@ -43,6 +49,8 @@ public class Person {
      * @return - an array filled with objects of the Person class.
      */
     public static Person[] getPersonArray(int quantityObjIntoArr) {
+        // опять же - располагайте переменные как можно ближе к их использованию
+        // randomOne - непонятное название для переменной
         Random randomOne = new Random();
         Random randomAge = new Random();
         int numCharsName;
