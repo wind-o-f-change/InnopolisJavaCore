@@ -77,8 +77,7 @@ public class Person {
             else sex = Sex.WOMAN;
 
             // assigning a random age
-            int personAge;
-            personAge = new Random().nextInt(90);
+            int personAge = new Random().nextInt(90);
 
             humans[i] = new Person(namePerson.toString(), sex, personAge);
         }
