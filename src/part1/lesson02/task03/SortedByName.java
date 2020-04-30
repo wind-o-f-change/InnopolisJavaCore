@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * Create 23.04.2020
- * <p>
+ *
  * This class sorts instances of the Person class by sex
  *
  * @author Evtushenko Anton

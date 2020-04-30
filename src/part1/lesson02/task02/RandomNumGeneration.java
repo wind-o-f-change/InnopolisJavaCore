@@ -26,18 +26,15 @@ public class RandomNumGeneration {
 
         int numCycle = (int) (9 * random()); // Generation "N" random numbers //(сколько должно быть чисел)
 
-        // переменный лучше объявлять как можно ближе к их использованию. Вне цикла они не нужны
         int[] intsK = new int[numCycle];          // Values array
         int[] intsQ = new int[numCycle];          // sqrt(Value) array
 
         // Initialization cycle for the "intsK" and the "intsQ" arrays
         for (int i = 0; i < numCycle; i++) {
-            int indexArr = new Random().nextInt(genNumCycle.length - 1);
-            if (indexArr < 0) indexArr = 0;
 
-            // чем не устроил Random.nextInt()? :)
-            int k = genNumCycle[indexArr]; // parameter numbers for the "intsK" array
-                                           // selecting a random number from the "genNumCycle" array
+            int k = genNumCycle[new Random().nextInt(       // selecting a random number from the "genNumCycle" array
+                    (genNumCycle.length - 2) + 1)];
+
             // думайте об информативности, не лишним будет вывести само число
             if (k < 0) {
                 throw new MyNegativeNumberException(                   // Exception if "k" is negative
@@ -46,9 +43,7 @@ public class RandomNumGeneration {
             }
 
             intsK[i] = k;
-
-            int q = (int) sqrt(k);         // parameter square root from numbers for the "intsQ" array
-            intsQ[i] = q;
+            intsQ[i] = (int) sqrt(k);           // parameter square root from numbers for the "intsQ" array
         }
 
         /* Algorithm to check for matches "k" and "q" with prints to the console
@@ -56,10 +51,8 @@ public class RandomNumGeneration {
         for (int i = 0; i < numCycle; i++) {
             int q = intsQ[i];
 
-            // речь шла не о том, чтобы найти среди k равное q, а чтобы вывести такие q, квадрат целой части, которых равен k, из которого они получились
-            // например 9 и 3 подходят под это условие, а 5 и 2 с лишним нет.
             for (int j = 0; j < numCycle; j++) {
-//                System.out.printf("k = %d, q = %d\n", intsK[j],q);               //It's for you to test watch
+//                System.out.printf("k = %d, q = %d\n", intsK[j], q);               //It's for you to test watch
                 if (q*q == intsK[j]) System.out.println(String.format("a match is found: %d and %d",intsK[j], q));
             }
         }

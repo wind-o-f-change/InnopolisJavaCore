@@ -11,12 +11,10 @@ import java.util.*;
  */
 
 public class Person {
-    // опять же будьте последовательны. Почему одно поле final, а два других нет - несправедливость :)
     private final String name;
     private final String sex;
     private final int age;
 
-    // staticStringManOrWoman - суровое название аргумента :)
     public Person(String name, String sex, int age) {
         this.name = name;
         this.sex = sex;
@@ -47,9 +45,6 @@ public class Person {
      * @return - an array filled with objects of the Person class.
      */
     public static Person[] getPersonArray(int quantityObjIntoArr) {
-        // опять же - располагайте переменные как можно ближе к их использованию
-        // randomOne - непонятное название для переменной
-
         Person[] humans = new Person[quantityObjIntoArr];
 //        humans[0] = new Person("Alex", Sex.getMAN(), 20); //This for test*
 //        humans[1] = new Person("Alex", Sex.getMAN(), 20); //
@@ -57,10 +52,9 @@ public class Person {
         //Cycle generate  of a Person[quantityObjIntoArr]
 //        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
         for (int i = 0; i < quantityObjIntoArr; i++) {
-            StringBuilder namePerson;
             int numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
             char[] chars = "zabcdefghijklmnopqrstuvwxyza".toCharArray();
-            namePerson = new StringBuilder(numCharsName);
+            StringBuilder namePerson = new StringBuilder(numCharsName);
 
             // Cycle generate a Person the name
             for (int j = 0; j < numCharsName; j++) {
