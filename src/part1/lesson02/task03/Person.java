@@ -57,7 +57,6 @@ public class Person {
         //Cycle generate  of a Person[quantityObjIntoArr]
 //        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
         for (int i = 0; i < quantityObjIntoArr; i++) {
-
             StringBuilder namePerson;
             int numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
             char[] chars = "zabcdefghijklmnopqrstuvwxyza".toCharArray();
