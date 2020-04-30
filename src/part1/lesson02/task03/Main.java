@@ -14,16 +14,12 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
+        runTask(Person.getPersonArray(10001), new SortedByName());
 
-        Comparator persNameComp= new SortedByName();
-        Comparator persAgeComp = new SortedByAge();
-        Comparator persCompAgeName = new SortedByAge().thenComparing(new SortedByName());
-        Comparator persCompNameAge = new SortedByName().thenComparing(new SortedByAge());
-
-        runTask(Person.getPersonArray(10001), persNameComp);
-//        runTask(Person.getPersonArray(10001), persAgeComp);
-//        runTask(Person.getPersonArray(10001), persCompAgeName);
-//        runTask(Person.getPersonArray(10001), persCompNameAge);
+        // This for test
+//        runTask(Person.getPersonArray(10001), new SortedByAge());
+//        runTask(Person.getPersonArray(10001), new SortedByAge().thenComparing(new SortedByName());
+//        runTask(Person.getPersonArray(10001), new SortedByName().thenComparing(new SortedByAge());
     }
 
     /**
