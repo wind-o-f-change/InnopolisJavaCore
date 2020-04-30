@@ -33,7 +33,7 @@ public class Person {
      */
     // статические методы - зло :) На самом деле нет ни одной хорошей причины, чтобы этот метод был здесь
     // он только перегружает класс Person
-    public static Person[] sortPersonArrayByComparator(Person[] people, Comparator personComparator) {
+    public static Person[] sortByComparator(Person[] people, Comparator personComparator) {
         // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));

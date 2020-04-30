@@ -36,7 +36,7 @@ public class Main {
     // в нашем случае можно подумать о функции принимающей массив и конкретный Comparator
     public static void runTask(Person[] p, Comparator c1) {
         Date startA = new Date();
-        Arrays.asList(Person.sortPersonArray(p, c1)).forEach(System.out::println);
+        Arrays.asList(Person.sortByComparator(p, c1)).forEach(System.out::println);
         Date endA = new Date();
 
         System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
