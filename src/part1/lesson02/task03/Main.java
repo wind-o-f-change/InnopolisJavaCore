@@ -20,10 +20,10 @@ public class Main {
         Comparator persCompAgeName = new SortedByAge().thenComparing(new SortedByName());
         Comparator persCompNameAge = new SortedByName().thenComparing(new SortedByAge());
 
-        runTask(Person.getPersonArray(10001), persNameComp);
-        runTask(Person.getPersonArray(10001), persAgeComp);
-        runTask(Person.getPersonArray(10001), persCompAgeName);
-        runTask(Person.getPersonArray(10001), persCompNameAge);
+        runTask(Person.getPersonArray(101), persNameComp);
+//        runTask(Person.getPersonArray(10001), persAgeComp);
+//        runTask(Person.getPersonArray(10001), persCompAgeName);
+//        runTask(Person.getPersonArray(10001), persCompNameAge);
     }
 
     /**
