@@ -72,14 +72,13 @@ public class Person {
 
             // assigning a random gender
             String sex;
-            Random random = new Random();
-            int personSexInt = random.nextInt(40);
+            int personSexInt = new Random().nextInt(40);
             if (personSexInt <= 10 | (personSexInt > 20 & personSexInt < 30)) sex = Sex.MAN;
             else sex = Sex.WOMAN;
 
             // assigning a random age
             int personAge;
-            personAge = random.nextInt(90);
+            personAge = new Random().nextInt(90);
 
             humans[i] = new Person(namePerson.toString(), sex, personAge);
         }

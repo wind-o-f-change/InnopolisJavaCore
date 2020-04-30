@@ -6,24 +6,45 @@ import java.util.*;
 /**
  * Create 25.04.2020
  *
+ * Этот класс реализующий следующий функционал:
+ * Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта раскладываются в подходящую коллекцию (выбрать самостоятельно).
+ * Существует метод summator, возвращающий сумму всех элементов коллекции.
+ * Существует метод splitter, выполняющий поочередное деление всех хранящихся в объекте элементов на делитель, являющийся аргументом метода. Хранящиеся в объекте данные полностью заменяются результатами деления.
+ * Необходимо правильно переопределить методы toString, hashCode, equals, чтобы можно было использовать MathBox для вывода данных на экран и хранение объектов этого класса в коллекциях (например, hashMap). Выполнение контракта обязательно!
+ * Создать метод, который получает на вход Integer и если такое значение есть в коллекции, удаляет его.
+ *
  * @autor Evtushenko Anton
  */
 
 public class MathBox<T extends Number> extends ObjectBox {
     private ArrayList<Number> numberList = new ArrayList<>();
 
+    /**
+     * This method performs sequential division of all elements stored in
+     * the object by the divisor(l) that is the method argument. The data stored
+     * in the object is completely replaced by the division results.
+     * @param l - divisor
+     */
     public void separator(long l){
         for (int i = 0; i < numberList.size(); i++) {
             numberList.set(i, (numberList.get(i).doubleValue()/l));
         }
     }
 
+    /**
+     * Overload of the previous method
+     * @param - divisor
+     */
     public void separator(double d){
         for (int i = 0; i < numberList.size(); i++) {
             numberList.set(i, (numberList.get(i).doubleValue()/d));
         }
     }
 
+    /**
+     * This method returns a sum of all items in a Person collection.
+     * @return - a sum of all items in a Person collection.
+     */
     public double summator() {
         return numberList.stream().mapToDouble(Number::doubleValue).sum();
     }
