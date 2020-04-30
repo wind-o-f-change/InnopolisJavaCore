@@ -42,5 +42,6 @@ public class Main {
         System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
                 (endA.getTime() - startA.getTime()));
     }
+
     private Main(){}
 }
