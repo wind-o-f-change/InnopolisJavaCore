@@ -10,17 +10,9 @@ package part1.lesson02.task03;
 
 public class Sex {
     //будьте последовательны в именовании
-    private static final String getMAN = "MAN";
-    private static final String WOMAN = "WOMAN";
+    static final String MAN = "MAN";
+    static final String WOMAN = "WOMAN";
 
     // для констант геттеры обычно не делают
-    public static String getMAN() {
-        return getMAN;
-    }
-
-    public static String getWOMAN() {
-        return WOMAN;
-    }
-
     private Sex(){};
 }

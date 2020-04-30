@@ -12,19 +12,19 @@ import java.util.*;
 
 public class Person {
     // опять же будьте последовательны. Почему одно поле final, а два других нет - несправедливость :)
-    private String name;
+    private final String name;
     private final String sex;
-    private int age;
+    private final int age;
 
     // staticStringManOrWoman - суровое название аргумента :)
-    public Person(String name, String staticStringManOrWoman, int age) {
+    public Person(String name, String sex, int age) {
         this.name = name;
-        this.sex = staticStringManOrWoman;
+        this.sex = sex;
         this.age = age;
     }
 
     /**
-     * This method sorts an array of the Person class
+     * This method sorts an array of the Person class by Comparator
      *
      * @param people           - sortable array of the Person class
      * @param personComparator - comparator for sorting the Person class
@@ -33,32 +33,23 @@ public class Person {
      */
     // статические методы - зло :) На самом деле нет ни одной хорошей причины, чтобы этот метод был здесь
     // он только перегружает класс Person
-    public static Person[] sortPersonArray(Person[] people, Comparator personComparator) {
+    public static Person[] sortPersonArrayByComparator(Person[] people, Comparator personComparator) {
         // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));
 
         // это не так работает :) в аргумент toArray нужно передавать массив
-        Person[] humans = people1.toArray(Person[]::new);
-        return humans;
+        return people1.toArray(new Person[people1.size()]);
     }
 
     /**
-     *
      * @param quantityObjIntoArr - the desired size of an array filled with objects of the Person class.
      * @return - an array filled with objects of the Person class.
      */
     public static Person[] getPersonArray(int quantityObjIntoArr) {
         // опять же - располагайте переменные как можно ближе к их использованию
         // randomOne - непонятное название для переменной
-        Random randomOne = new Random();
-        Random randomAge = new Random();
-        int numCharsName;
-        int personAge;
-        int personSexInt;
-        char[] chars;
-        StringBuilder namePerson;
-        String sex;
+
         Person[] humans = new Person[quantityObjIntoArr];
 //        humans[0] = new Person("Alex", Sex.getMAN(), 20); //This for test*
 //        humans[1] = new Person("Alex", Sex.getMAN(), 20); //
@@ -66,8 +57,10 @@ public class Person {
         //Cycle generate  of a Person[quantityObjIntoArr]
 //        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
         for (int i = 0; i < quantityObjIntoArr; i++) {
-            numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
-            chars = "zabcdefghijklmnopqrstuvwxyza".toCharArray();
+
+            StringBuilder namePerson;
+            int numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
+            char[] chars = "zabcdefghijklmnopqrstuvwxyza".toCharArray();
             namePerson = new StringBuilder(numCharsName);
 
             // Cycle generate a Person the name
@@ -79,15 +72,17 @@ public class Person {
             }
 
             // assigning a random gender
-            personSexInt = randomOne.nextInt(40);
-            if (personSexInt <= 10 | (personSexInt > 20 & personSexInt < 30)) sex = Sex.getMAN();
-            else sex = Sex.getWOMAN();
+            String sex;
+            Random random = new Random();
+            int personSexInt = random.nextInt(40);
+            if (personSexInt <= 10 | (personSexInt > 20 & personSexInt < 30)) sex = Sex.MAN;
+            else sex = Sex.WOMAN;
 
             // assigning a random age
-            personAge = randomAge.nextInt(90);
+            int personAge;
+            personAge = random.nextInt(90);
 
             humans[i] = new Person(namePerson.toString(), sex, personAge);
-
         }
 
         //The loop checks the array for clones
