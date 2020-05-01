@@ -22,24 +22,6 @@ public class Person {
     }
 
     /**
-     * This method sorts an array of the Person class by Comparator
-     *
-     * @param people           - sortable array of the Person class
-     * @param personComparator - comparator for sorting the Person class
-     *
-     * @return - sorted a Person[]
-     */
-    // статические методы - зло :) На самом деле нет ни одной хорошей причины, чтобы этот метод был здесь
-    // он только перегружает класс Person
-    public static Person[] sortByComparator(Person[] people, Comparator personComparator) {
-        // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
-        Set<Person> people1 = new TreeSet<>(personComparator);
-        people1.addAll(Arrays.asList(people));
-
-        return people1.toArray(new Person[people1.size()]);
-    }
-
-    /**
      * @param quantityObjIntoArr - the desired size of an array filled with objects of the Person class.
      * @return - an array filled with objects of the Person class.
      */
