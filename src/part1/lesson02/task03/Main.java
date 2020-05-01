@@ -14,6 +14,7 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
+        // Стало работать примерно в 2 раза быстрее :)
         PersonStore store = new PersonStore(Person.getPersonArray(10001));
         runTask(store, new SortedByName());
         runTask(store.getPersons(), new SortedByName());
