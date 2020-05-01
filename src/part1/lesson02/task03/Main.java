@@ -15,7 +15,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         PersonStore store = new PersonStore();
-        store.getPersonArray(10001);
+        store.readyPersonArr(10001);
         // Сам алгоритм стал работать примерно в 2 раза быстрее :)
         runTask(store, new SortedByName());
         runTask(store.getPersons(), new SortedByName());
