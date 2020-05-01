@@ -100,7 +100,15 @@ public class MathBox<T extends Number> extends ObjectBox {
      */
     @Override
     public void deleteObject(Object objMathBox) {
-        T number = (T) objMathBox;
+        T number = null;
+        try {
+            number = (T) objMathBox;
+        } catch (ClassCastException e) {
+            System.err.println(String.format(
+                    "Unacceptable object type. The object must be extended of <Number> type. \"%s\" - not extended <Number>",
+                    objMathBox.getClass().getSimpleName())
+            );
+        }
         numberList.remove(number);
     }
 
