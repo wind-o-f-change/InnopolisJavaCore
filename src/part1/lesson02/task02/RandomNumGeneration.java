@@ -24,7 +24,7 @@ public class RandomNumGeneration {
             genNumCycle[i] = startGenerationNum++;
         }
 
-        int numCycle = (int) (9 * random()); // Generation "N" random numbers //(сколько должно быть чисел)
+        int numCycle = (int) (9 * random());      // Generation "N" random numbers //(сколько должно быть чисел)
 
         int[] intsK = new int[numCycle];          // Values array
         int[] intsQ = new int[numCycle];          // sqrt(Value) array
@@ -35,7 +35,6 @@ public class RandomNumGeneration {
             int k = genNumCycle[new Random().nextInt(       // selecting a random number from the "genNumCycle" array
                     (genNumCycle.length - 2) + 1)];
 
-            // думайте об информативности, не лишним будет вывести само число
             if (k < 0) {
                 throw new MyNegativeNumberException(                   // Exception if "k" is negative
                         String.format(
