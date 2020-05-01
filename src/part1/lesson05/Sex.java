@@ -7,10 +7,6 @@ package part1.lesson05;
  */
 
 public enum Sex {
-    MAN("MAN"),
-    WOMAN("WOMAN");
-    private String sex;
-    Sex(String sex) {
-        this.sex = sex;
-    }
+    MAN,
+    WOMAN
 }

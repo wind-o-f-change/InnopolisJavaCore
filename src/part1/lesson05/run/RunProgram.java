@@ -14,7 +14,11 @@ import part1.lesson05.Sex;
 public class RunProgram {
     public static void main(String[] args) {
         PetStore petStore = new PetStore();
-        petStore.addPets(new Pet("Murka",Sex.WOMAN, 2.4, new Person("Ass", Sex.WOMAN, 34)));
+        Person p1 = new Person("Ada", Sex.WOMAN, 34);
+        System.out.println(p1);
+        Pet pet = new Pet("Murka",Sex.WOMAN, 2.4, p1);
+        petStore.addPet(pet);
+        petStore.addPet(pet);
     }
     private RunProgram(){}
 }

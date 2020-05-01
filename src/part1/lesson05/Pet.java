@@ -14,11 +14,10 @@ public class Pet {
     private final double weight;
     private final Sex sex;
     private final String name;
-    private final boolean isExists = true;
     private Person person;
 
     public Pet(String name, Sex sex, double weight, Person person) {
-        this.id = ++setterID;
+        this.id = setterID++;
         this.weight = weight;
         this.sex = sex;
         this.person = person;
@@ -29,12 +28,12 @@ public class Pet {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public long getTotalQuantity() {
+        return setterID;
     }
 
-    public boolean isExists() {
-        return isExists;
+    public String getName() {
+        return name;
     }
 
     public Sex getSex() {
@@ -61,6 +60,6 @@ public class Pet {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, weight, sex);
+        return Objects.hash(id, name, sex);
     }
 }

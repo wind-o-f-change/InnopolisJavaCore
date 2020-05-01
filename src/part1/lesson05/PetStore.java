@@ -1,7 +1,8 @@
 package part1.lesson05;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Create 01.05.2020
@@ -10,23 +11,23 @@ import java.util.Map;
  */
 
 public class PetStore {
-    private Map<String, Pet> petsMap = new HashMap<>();
+    private Set<Pet> petSet = new HashSet<>();
 
-    public void addPets(Pet pet) {
-        if (petsMap.get(pet.getName()).isExists()){
-            throw new ArrayStoreException(String.format("Pet with name %s exist already", pet.getName()));
+    public void addPet(Pet pet) {
+        if (petSet.contains(pet)) {
+            throw new ArrayStoreException("It's pet exist already");
         }
-        petsMap.put(pet.getName(), pet);
+        petSet.add(pet);
     }
 
     public PetStore() {
     }
 
-    public PetStore(Map<String, Pet> petsMap) {
-        this.petsMap = petsMap;
+    public Set<Pet> getPetSet() {
+        return petSet;
     }
 
-    public Map<String, Pet> getPetsMap() {
-        return petsMap;
+    public PetStore(Set<Pet> petSet) {
+        this.petSet = petSet;
     }
 }
