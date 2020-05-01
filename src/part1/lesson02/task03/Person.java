@@ -36,7 +36,6 @@ public class Person {
         Set<Person> people1 = new TreeSet<>(personComparator);
         people1.addAll(Arrays.asList(people));
 
-        // это не так работает :) в аргумент toArray нужно передавать массив
         return people1.toArray(new Person[people1.size()]);
     }
 
