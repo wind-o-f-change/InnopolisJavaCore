@@ -1,17 +1,11 @@
 package part1.lesson03;
 
-import java.sql.Array;
 import java.util.*;
 
 /**
  * Create 25.04.2020
- *
- * Этот класс реализующий следующий функционал:
- * Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта раскладываются в подходящую коллекцию (выбрать самостоятельно).
- * Существует метод summator, возвращающий сумму всех элементов коллекции.
- * Существует метод splitter, выполняющий поочередное деление всех хранящихся в объекте элементов на делитель, являющийся аргументом метода. Хранящиеся в объекте данные полностью заменяются результатами деления.
- * Необходимо правильно переопределить методы toString, hashCode, equals, чтобы можно было использовать MathBox для вывода данных на экран и хранение объектов этого класса в коллекциях (например, hashMap). Выполнение контракта обязательно!
- * Создать метод, который получает на вход Integer и если такое значение есть в коллекции, удаляет его.
+ * This class stores a collection of objects which are extensible from the <Numbers> type.
+ * Also implements functionality for managing objects from this collection
  *
  * @autor Evtushenko Anton
  */
@@ -20,35 +14,11 @@ public class MathBox<T extends Number> extends ObjectBox {
     private ArrayList<Number> numberList = new ArrayList<>();
 
     /**
-     * This method performs sequential division of all elements stored in
-     * the object by the divisor(l) that is the method argument. The data stored
-     * in the object is completely replaced by the division results.
-     * @param l - divisor
+     * This constructor creates new a MathBox object and adds an array to it
+     * excluding duplicates
+     *
+     * @param numbers - Array of the <T> type
      */
-    public void separator(long l){
-        for (int i = 0; i < numberList.size(); i++) {
-            numberList.set(i, (numberList.get(i).doubleValue()/l));
-        }
-    }
-
-    /**
-     * Overload of the previous method
-     * @param - divisor
-     */
-    public void separator(double d){
-        for (int i = 0; i < numberList.size(); i++) {
-            numberList.set(i, (numberList.get(i).doubleValue()/d));
-        }
-    }
-
-    /**
-     * This method returns a sum of all items in a Person collection.
-     * @return - a sum of all items in a Person collection.
-     */
-    public double summator() {
-        return numberList.stream().mapToDouble(Number::doubleValue).sum();
-    }
-
     public MathBox(T[] numbers) {
         List<T> nums = new LinkedList<>();
         nums.addAll(Arrays.asList(numbers));
@@ -71,18 +41,72 @@ public class MathBox<T extends Number> extends ObjectBox {
         numberList.addAll(nums);
     }
 
-    @Override
-    public void addObject(Object objMathBox) {
-        if (!(objMathBox instanceof Number)) throw new ClassCastException("Недопустимое значение");
-        numberList.add((T) objMathBox);
+    /**
+     * This method performs sequential division of all elements stored in
+     * the object by the divisor(l) that is the method argument. The data stored
+     * in the object is completely replaced by the division results.
+     *
+     * @param l - divisor
+     */
+    public void separator(long l) {
+        for (int i = 0; i < numberList.size(); i++) {
+            numberList.set(i, (numberList.get(i).doubleValue() / l));
+        }
     }
 
+    /**
+     * Overload of the previous method
+     *
+     * @param - divisor
+     */
+    public void separator(double d) {
+        for (int i = 0; i < numberList.size(); i++) {
+            numberList.set(i, (numberList.get(i).doubleValue() / d));
+        }
+    }
+
+    /**
+     * This method returns a sum of all items in a Person collection.
+     *
+     * @return - a sum of all items in a Person collection.
+     */
+    public double summator() {
+        return numberList.stream().mapToDouble(Number::doubleValue).sum();
+    }
+
+    /**
+     * This method adds an object to a list of objects
+     *
+     * @param objMathBox - Added object which must be extended of <Number> type
+     *
+     * @throws ClassCastException
+     */
+    @Override
+    public void addObject(Object objMathBox) {
+        try {
+            numberList.add((T) objMathBox);
+        } catch (ClassCastException e) {
+            System.err.println(String.format(
+                    "Unacceptable object type. The object must be extended of <Number> type. \"%s\" - not extended <Number>",
+                    objMathBox.getClass().getSimpleName())
+            );
+        }
+    }
+
+    /**
+     * This method delete object of list
+     *
+     * @param objMathBox removable object
+     */
     @Override
     public void deleteObject(Object objMathBox) {
-        Number number = (Number) objMathBox;
+        T number = (T) objMathBox;
         numberList.remove(number);
     }
 
+    /**
+     * This method outputs the contents of the collection in a string.
+     */
     @Override
     public void dump() {
         System.out.print("Content from the MathBox list : ");
