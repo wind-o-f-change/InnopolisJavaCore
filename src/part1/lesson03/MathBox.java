@@ -97,6 +97,8 @@ public class MathBox<T extends Number> extends ObjectBox {
      * This method delete object of list
      *
      * @param objMathBox removable object
+     *
+     * @throws ClassCastException
      */
     @Override
     public void deleteObject(Object objMathBox) {
