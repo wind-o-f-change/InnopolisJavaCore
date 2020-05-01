@@ -27,6 +27,10 @@ public class PersonStore {
         return people1.toArray(new Person[people1.size()]);
     }
 
+    public Person[] getPersons() {
+        return person;
+    }
+
     public PersonStore(){}
 
     public PersonStore(Person[] person) {

@@ -14,7 +14,9 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        runTask(Person.getPersonArray(10001), new SortedByName());
+        PersonStore store = new PersonStore(Person.getPersonArray(10001));
+        runTask(store, new SortedByName());
+        runTask(store.getPersons(), new SortedByName());
 
         // This for test
 //        runTask(Person.getPersonArray(10001), new SortedByAge());
@@ -31,6 +33,15 @@ public class Main {
     public static void runTask(Person[] p, Comparator c1) {
         Date startA = new Date();
         Arrays.asList(new PersonStore().sortByComparator(p, c1)).forEach(System.out::println);
+        Date endA = new Date();
+
+        System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
+                (endA.getTime() - startA.getTime()));
+    }
+
+    public static void runTask(PersonStore personStore, Comparator c1) {
+        Date startA = new Date();
+        Arrays.asList(personStore.sortByComparator(personStore.getPersons(), c1)).forEach(System.out::println);
         Date endA = new Date();
 
         System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
