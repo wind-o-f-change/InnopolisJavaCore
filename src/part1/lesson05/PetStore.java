@@ -1,7 +1,6 @@
 package part1.lesson05;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -18,6 +17,14 @@ public class PetStore {
             throw new ArrayStoreException("It's pet exist already");
         }
         petSet.add(pet);
+    }
+
+    public void findByName(){
+        // Start
+    }
+
+    public void findByID(){
+        // Start
     }
 
     public PetStore() {

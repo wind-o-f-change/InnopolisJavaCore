@@ -24,20 +24,8 @@ public class Pet {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public long getTotalQuantity() {
-        return setterID;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public Sex getSex() {
-        return sex;
     }
 
     public Person getPerson() {
@@ -61,5 +49,10 @@ public class Pet {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, sex);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pet \"%s\", ID: %d, sex: %S.\tHis %s", name, id, sex, person);
     }
 }

@@ -15,10 +15,10 @@ public class RunProgram {
     public static void main(String[] args) {
         PetStore petStore = new PetStore();
         Person p1 = new Person("Ada", Sex.WOMAN, 34);
-        System.out.println(p1);
         Pet pet = new Pet("Murka",Sex.WOMAN, 2.4, p1);
-        petStore.addPet(pet);
-        petStore.addPet(pet);
+        System.out.println(pet);
+//        petStore.addPet(pet);
+//        petStore.addPet(pet);
     }
     private RunProgram(){}
 }

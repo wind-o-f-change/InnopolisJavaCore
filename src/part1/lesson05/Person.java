@@ -1,5 +1,6 @@
 package part1.lesson05;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @autor Evtushenko Anton
  */
 
-public class Person {
+public class Person implements Comparable {
     private final String name;
     private final Sex sex;
     private final int age;
@@ -19,6 +20,16 @@ public class Person {
         this.age = age;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Person p1 = null;
+        try {
+            p1 = (Person) o;
+        }catch (ClassCastException e){
+            e.printStackTrace();
+        }
+        return this.name.compareTo(p1.name);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,6 +48,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("Person name: %s, age: %d, sex: %S", name, age, sex) ;
+        return String.format("person \"%s\", age: %d, sex: %S.", name, age, sex);
+    }
+
+    public String getName() {
+        return name;
     }
 }
