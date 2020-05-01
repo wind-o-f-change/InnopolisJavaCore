@@ -1,8 +1,7 @@
-package part1.lesson04.run;
+package part1.lesson05.run;
 
-import part1.lesson04.Person;
-import part1.lesson04.PetsStore;
-import part1.lesson04.Sex;
+import part1.lesson05.Person;
+import part1.lesson05.Sex;
 
 /**
  * Create 01.05.2020
