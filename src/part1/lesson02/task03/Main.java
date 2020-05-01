@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * Create 23.04.2020
- *
+ * This class for run tasks
  * @autor Evtushenko Anton
  */
 
