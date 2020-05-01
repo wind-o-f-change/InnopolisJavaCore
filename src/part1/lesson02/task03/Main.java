@@ -40,6 +40,12 @@ public class Main {
                 (endA.getTime() - startA.getTime()));
     }
 
+    /**
+     * @param personStore  - Store for a Person object.
+     * @param c1 - comparator for sorting an array of the Person class.
+     *
+     * @throws MainErrExceptions
+     */
     public static void runTask(PersonStore personStore, Comparator c1) {
         Date startA = new Date();
         Arrays.asList(personStore.sortByComparator(personStore.getPersons(), c1)).forEach(System.out::println);
