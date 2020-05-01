@@ -11,12 +11,13 @@ import java.util.Objects;
 public class Pet {
     private static long setterID = 0;
     private final long id;
-    private final long weight;
+    private final double weight;
     private final Sex sex;
     private final String name;
+    private final boolean isExists = true;
     private Person person;
 
-    public Pet(String name, Sex sex, long weight, Person person) {
+    public Pet(String name, Sex sex, double weight, Person person) {
         this.id = ++setterID;
         this.weight = weight;
         this.sex = sex;
@@ -32,6 +33,10 @@ public class Pet {
         return name;
     }
 
+    public boolean isExists() {
+        return isExists;
+    }
+
     public Sex getSex() {
         return sex;
     }
@@ -40,7 +45,7 @@ public class Pet {
         return person;
     }
 
-    public long getWeight() {
+    public double getWeight() {
         return weight;
     }
 

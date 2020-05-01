@@ -1,6 +1,8 @@
 package part1.lesson05.run;
 
 import part1.lesson05.Person;
+import part1.lesson05.Pet;
+import part1.lesson05.PetStore;
 import part1.lesson05.Sex;
 
 /**
@@ -11,9 +13,8 @@ import part1.lesson05.Sex;
 
 public class RunProgram {
     public static void main(String[] args) {
-        System.out.println(new Person("Fedor", Sex.MAN, 12));
-
-
+        PetStore petStore = new PetStore();
+        petStore.addPets(new Pet("Murka",Sex.WOMAN, 2.4, new Person("Ass", Sex.WOMAN, 34)));
     }
     private RunProgram(){}
 }

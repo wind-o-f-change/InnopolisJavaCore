@@ -9,23 +9,24 @@ import java.util.Map;
  * @autor Evtushenko Anton
  */
 
-public class PetsStore {
+public class PetStore {
     private Map<String, Pet> petsMap = new HashMap<>();
 
     public void addPets(Pet pet) {
-        System.out.println(petsMap.get(pet.getName()));
+        if (petsMap.get(pet.getName()).isExists()){
+            throw new ArrayStoreException(String.format("Pet with name %s exist already", pet.getName()));
+        }
+        petsMap.put(pet.getName(), pet);
     }
 
-    public PetsStore() {
+    public PetStore() {
     }
 
-    public PetsStore(Map<String, Pet> petsMap) {
+    public PetStore(Map<String, Pet> petsMap) {
         this.petsMap = petsMap;
     }
 
     public Map<String, Pet> getPetsMap() {
         return petsMap;
     }
-
-
 }
