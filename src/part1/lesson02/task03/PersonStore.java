@@ -37,7 +37,7 @@ public class PersonStore {
      * @param quantityObjIntoArr - the desired size of an array filled with objects of the Person class.
      * @return - an array filled with objects of the Person class.
      */
-    public Person[] getPersonArr(int quantityObjIntoArr){
+    public Person[] createPersons(int quantityObjIntoArr){
         PersonStore store = new PersonStore();
         store.readyPersonArr(quantityObjIntoArr);
         return store.person;
