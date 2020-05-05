@@ -13,35 +13,26 @@ import java.util.*;
 public class PersonStore {
     private Person[] person;
 
-    /**
-     * This method sorts an array of the Person class by Comparator
-     *
-     * @param people           - sortable array of the Person class
-     * @param personComparator - comparator for sorting the Person class
-     *
-     * @return - sorted a Person[]
-     */
-    public Person[] sortByComparator(Person[] people, Comparator personComparator) {
-        // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
-        Set<Person> people1 = new TreeSet<>(personComparator);
-        people1.addAll(Arrays.asList(people));
-
-        return people1.toArray(new Person[people1.size()]);
-    }
+//    /**
+//     * This method sorts an array of the Person class by Comparator
+//     *
+//     * @param people           - sortable array of the Person class
+//     * @param personComparator - comparator for sorting the Person class
+//     *
+//     * @return - sorted a Person[]
+//     */
+//    public Person[] sortByComparator(Person[] people, Comparator personComparator) {
+//        // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
+//        Set<Person> people1 = new TreeSet<>(personComparator);
+//        people1.addAll(Arrays.asList(people));
+//
+//        return people1.toArray(new Person[people1.size()]);
+//    }
 
     public Person[] getPersons() {
         return person;
     }
 
-    /**
-     * @param quantityObjIntoArr - the desired size of an array filled with objects of the Person class.
-     * @return - an array filled with objects of the Person class.
-     */
-    public Person[] createPersons(int quantityObjIntoArr){
-        PersonStore store = new PersonStore();
-        store.readyPersonArr(quantityObjIntoArr);
-        return store.person;
-    }
     /**
      * This method initializes the "person" array filled with objects of the Person class in the quantity specified into "quantityObjIntoArr".
      * @param quantityObjIntoArr - the desired size of an array filled with objects of the Person class.
@@ -93,7 +84,15 @@ public class PersonStore {
 
     public PersonStore(){}
 
-    public PersonStore(Person[] person) {
+    public PersonStore(int i){
+        readyPersonArr(i);
+    }
+
+    public Person[] getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person[] person) {
         this.person = person;
     }
 }

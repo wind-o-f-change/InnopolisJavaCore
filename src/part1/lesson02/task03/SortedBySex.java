@@ -3,12 +3,12 @@ package part1.lesson02.task03;
 /**
  * Create 23.04.2020
  *
- * This class sorts instances of the Person class by age
+ * This class sorts instances of the Person class by sex
  *
  * @author Evtushenko Anton
  */
 
-public class SortedByAge implements Sorter {
+public class SortedBySex implements Sorter {
     @Override
     public Person[] sorting(PersonStore store) {
         Person[] people = store.getPersons();
@@ -16,8 +16,9 @@ public class SortedByAge implements Sorter {
         boolean needIteration = true;
         while (needIteration) {
             needIteration = false;
+
             for (int i = 1; i < people.length; i++) {
-                if (people[i].getAge() > people[i - 1].getAge()) {
+                if (genderPoints(people[i]) > genderPoints(people[i -1])) {
                     swap(people, i, i-1);
                     needIteration = true;
                 }
@@ -32,15 +33,18 @@ public class SortedByAge implements Sorter {
         people[ind1] = people[ind2];
         people[ind2] = person;
     }
-//    implements Comparator
+
+    private int genderPoints(Person person) {
+        int man = 1, woman = -1;
+        if (person.getSex().equals("MAN")) return man;
+        if (person.getSex().equals("WOMAN")) return woman;
+        else throw new IllegalArgumentException("Указан недопустимый пол");
+    }
 //    @Override
-//    public int compare(Object first, Object second) {
-//        Person a = (Person) first;
-//        Person b = (Person) second;
+//    public int compare(Object o1, Object o2) {
+//        Person a = (Person) o1;
+//        Person b = (Person) o2;
 //
-////        if (a.getAge() > b.getAge()) return -1;
-////        else if (a.getAge() < b.getAge()) return +1;
-////        else return 0;
-//        return a.getAge().
+//        return a.getName().compareTo(b.getName());
 //    }
 }
