@@ -16,7 +16,8 @@ public class SortedByAge implements Sorter {
         boolean needIteration = true;
         while (needIteration) {
             needIteration = false;
-            for (int i = 1; i < people.length; i++) {
+            int x = people.length;
+            for (int i = 1; i < x; i++) {
                 if (people[i].getAge() > people[i - 1].getAge()) {
                     swap(people, i, i-1);
                     needIteration = true;
