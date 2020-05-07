@@ -48,20 +48,9 @@ public class MathBox<T extends Number> extends ObjectBox {
      *
      * @param l - divisor
      */
-    public void separator(long l) {
+    public void separator(T l) {
         for (int i = 0; i < numberList.size(); i++) {
-            numberList.set(i, (numberList.get(i).doubleValue() / l));
-        }
-    }
-
-    /**
-     * Overload of the previous method
-     *
-     * @param - divisor
-     */
-    public void separator(double d) {
-        for (int i = 0; i < numberList.size(); i++) {
-            numberList.set(i, (numberList.get(i).doubleValue() / d));
+            numberList.set(i, (numberList.get(i).doubleValue() / l.longValue()));
         }
     }
 

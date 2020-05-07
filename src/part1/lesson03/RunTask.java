@@ -12,12 +12,7 @@ import java.text.NumberFormat;
 
 public class RunTask {
     public static void main(String[] args) {
-//        MathBox m = new MathBox(new Number[]{10,3.2f, 1.8d, 5l});
-//        m.dump();
-//        System.out.println("\n" + m.summator());
-//        m.separator(2.0);
-//        m.dump();
-        MathBox m = new MathBox(new Number[]{10,3.2f, 1.8d, 5l});
+        MathBox m = new MathBox(new Number[]{10,3.2f, 1.8d, 5L});
         m.addObject(new Object());
     }
     private RunTask(){}
