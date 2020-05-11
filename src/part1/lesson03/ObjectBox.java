@@ -29,14 +29,18 @@ public class ObjectBox {
      * @param o removable object
      */
     public void deleteObject(Object o){
-        objectList.removeAll(Arrays.asList(o));
+        objectList.remove(o);
     }
 
     /**
      * This method outputs the contents of the collection in a string.
      */
     public void dump() {
-        System.out.print("Content from the ObjectBox list : ");
+        print();
         objectList.forEach(v -> System.out.print(v + " "));
+    }
+
+    public void print() {
+        System.out.printf("Content from the %s list : ", this.getClass().getSimpleName());
     }
 }

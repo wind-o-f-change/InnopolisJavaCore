@@ -108,7 +108,7 @@ public class MathBox<T extends Number> extends ObjectBox {
      */
     @Override
     public void dump() {
-        System.out.print("Content from the MathBox list : ");
+        print();
         numberList.forEach(v -> System.out.print(v + " "));
     }
 
@@ -134,7 +134,6 @@ public class MathBox<T extends Number> extends ObjectBox {
             if ((i + 1) % 25 == 0) sb.append("\n");
         }
 
-//        sb.append("\nСумма значений коллекции равна:\n" + summator());
         return sb.toString();
     }
 }
