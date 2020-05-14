@@ -11,7 +11,7 @@ import java.util.*;
  */
 
 public class PetStore {
-    private TreeSet<Pet> sortByIDSet = new TreeSet<>();
+    private ArrayList<Pet> sortByIDSet = new ArrayList<>();
     private Map<String, Set<Pet>> findByNameMap = new HashMap<>();
 
     public void addPet(Pet pet) {
@@ -59,7 +59,7 @@ public class PetStore {
         pets.forEach(System.out::println);
     }
 
-    public TreeSet<Pet> getPets() {
+    public ArrayList<Pet> getPets() {
         return sortByIDSet;
     }
 }
