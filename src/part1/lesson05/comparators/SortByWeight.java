@@ -1,6 +1,6 @@
-package part1.lesson05.sortingClasses;
+package part1.lesson05.comparators;
 
-import part1.lesson05.Pet;
+import part1.lesson05.enitities.Pet;
 
 import java.util.Comparator;
 

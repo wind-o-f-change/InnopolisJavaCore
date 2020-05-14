@@ -1,6 +1,5 @@
-package part1.lesson05;
+package part1.lesson05.enitities;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 /**

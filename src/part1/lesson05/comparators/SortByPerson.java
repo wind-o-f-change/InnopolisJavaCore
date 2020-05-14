@@ -1,7 +1,6 @@
-package part1.lesson05.sortingClasses;
+package part1.lesson05.comparators;
 
-import part1.lesson05.Person;
-import part1.lesson05.Pet;
+import part1.lesson05.enitities.Person;
 
 import java.util.Comparator;
 
@@ -11,14 +10,14 @@ import java.util.Comparator;
  * @autor Evtushenko Anton
  */
 
-public class SortByName implements Comparator {
+public class SortByPerson implements Comparator {
     @Override
     public int compare(Object o1, Object o2) {
-        Pet p1 = null;
-        Pet p2 = null;
+        Person p1 = null;
+        Person p2 = null;
         try {
-            p1 = (Pet) o1;
-            p2 = (Pet) o2;
+            p1 = (Person) o1;
+            p2 = (Person) o2;
         }catch (ClassCastException e){
             e.printStackTrace();
         }

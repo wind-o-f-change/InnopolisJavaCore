@@ -14,7 +14,6 @@ public class Main {
         PersonStore store = new PersonStore(10001);
         runTask(store, new SortedByAge());
         runTask(store, new SortedBySex());
-
     }
 
     /**
