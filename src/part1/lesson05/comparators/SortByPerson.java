@@ -1,6 +1,7 @@
 package part1.lesson05.comparators;
 
 import part1.lesson05.enitities.Person;
+import part1.lesson05.enitities.Pet;
 
 import java.util.Comparator;
 
@@ -16,11 +17,11 @@ public class SortByPerson implements Comparator {
         Person p1 = null;
         Person p2 = null;
         try {
-            p1 = (Person) o1;
-            p2 = (Person) o2;
+            p1 = (Person) ((Pet)o1).getPerson();
+            p2 = (Person) ((Pet)o2).getPerson();
         }catch (ClassCastException e){
             e.printStackTrace();
         }
-        return p1.getName().compareTo(p2.getName());
+        return p1.compareTo(p2);
     }
 }

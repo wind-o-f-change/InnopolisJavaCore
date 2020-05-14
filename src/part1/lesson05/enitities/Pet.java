@@ -73,7 +73,7 @@ public class Pet implements Comparable{
 
     @Override
     public String toString() {
-        return String.format("Pet \"%s\", ID: %d, sex: %S.\tHis %s", name, id, sex, person);
+        return String.format("Pet \"%s\", ID: %d, sex: %S, weight: %s.\tHis %s", name, id, sex, weight, person);
     }
 
     @Override

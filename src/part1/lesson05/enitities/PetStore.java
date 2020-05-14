@@ -35,7 +35,7 @@ public class PetStore {
         return findByNameMap.get(name);
     }
 
-    public void changeByID(int id, String name, double weight, Person person) {
+    public void changeByID(int id, String name, double weight) {
         if (id < 1) throw new IllegalArgumentException("\"id\" питомца не может быть ноль");
 
         Pet[] pets = new Pet[sortByIDSet.size()];
@@ -44,7 +44,6 @@ public class PetStore {
         Pet p = pets[id - 1];
         p.setName(name);
         p.setWeight(weight);
-        p.setPerson(person);
         pets[id - 1] = p;
         sortByIDSet.clear();
         sortByIDSet.addAll(Arrays.asList(pets));
@@ -52,5 +51,15 @@ public class PetStore {
 
     public void printPets() {
         sortByIDSet.forEach(System.out::println);
+    }
+
+    public void printSortedPets(Comparator byComparators) {
+        TreeSet<Pet> pets = new TreeSet<>(byComparators);
+        pets.addAll(sortByIDSet);
+        pets.forEach(System.out::println);
+    }
+
+    public TreeSet<Pet> getPets() {
+        return sortByIDSet;
     }
 }
