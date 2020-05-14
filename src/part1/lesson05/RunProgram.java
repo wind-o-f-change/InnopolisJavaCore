@@ -27,7 +27,7 @@ public class RunProgram {
                 new Person("Lena", Sex.WOMAN, 23)));
 
         petsStore.addPet(new Pet("Barsik", Sex.MAN, 4.0,
-                new Person("Ivan", Sex.MAN, 5)));
+                new Person("Anton", Sex.MAN, 5)));
 
         petsStore.addPet(new Pet("Murka", Sex.WOMAN, 2.0,
                 new Person("Lara", Sex.WOMAN, 12)));
@@ -51,10 +51,6 @@ public class RunProgram {
         petsStore.printSortedPets(new SortByWeight());
         System.out.println("\nSortByPerson");
         petsStore.printSortedPets(new SortByPerson());
-        System.out.println("\nSortBy: Person/Name/Weight");
-        petsStore.printSortedPets(new SortByPerson().thenComparing(new SortByName().thenComparing(new SortByWeight())));
-        System.out.println("\nSortBy: Weight/Person/Name");
-        petsStore.printSortedPets(new SortByWeight().thenComparing(new SortByPerson().thenComparing(new SortByName())));
     }
     private RunProgram(){}
 }
