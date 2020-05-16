@@ -8,7 +8,7 @@ package part1.lesson02.task03;
  * @author Evtushenko Anton
  */
 
-public class SortedBySex implements Sorter {
+public class SortedBySex <T extends Person> implements Sorter {
     /**
      * This method sorts a "Person" array by sex from the "PersonStore" object
      * @param store the object stores a "Person" array
@@ -44,5 +44,13 @@ public class SortedBySex implements Sorter {
         if (person.getSex().equals("MAN")) return man;
         if (person.getSex().equals("WOMAN")) return woman;
         else throw new IllegalArgumentException("Указан недопустимый пол");
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        T a = (T) o1;
+        T b = (T) o2;
+
+        return  genderPoints(b) - genderPoints(a);
     }
 }

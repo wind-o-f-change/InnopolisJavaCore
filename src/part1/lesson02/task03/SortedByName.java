@@ -1,20 +1,12 @@
 package part1.lesson02.task03;
 
 /**
- * Create 23.04.2020
+ * Create 16.05.2020
  *
- * This class for sorts instances of the Person class by age
- *
- * @author Evtushenko Anton
+ * @autor Evtushenko Anton
  */
 
-public class SortedByAge <T extends Person> implements Sorter {
-    /**
-     * This method sorts a "Person" array by age from the "PersonStore" object
-     * @param store the object stores a "Person" array
-     * @return a "Person" array
-     */
-    // Insertion Sort
+public class SortedByName <T extends Person> implements Sorter{
     @Override
     public Person[] sorting(PersonStore store) {
         Person[] people = store.getPersons();
@@ -25,8 +17,8 @@ public class SortedByAge <T extends Person> implements Sorter {
             int j = i - 1;
             for (; j >= 0; j--) {
                 Person human2 = people[j];
-                if (compare(human, human2) > 0 ) {
-                    people[j + 1] = human2;
+                if (compare(human, human2) < 0) {
+                    people[j + 1] = people[j];
                 } else {
                     break;
                 }
@@ -36,14 +28,11 @@ public class SortedByAge <T extends Person> implements Sorter {
         return people;
     }
 
-
     @Override
     public int compare(Object o1, Object o2) {
         T a = (T) o1;
         T b = (T) o2;
 
-        if (a.getAge() > b.getAge()) return -1;
-        else if (a.getAge() < b.getAge()) return +1;
-        else return 0;
+        return a.getName().compareTo(b.getName());
     }
 }

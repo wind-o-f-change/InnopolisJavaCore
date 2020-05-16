@@ -1,5 +1,7 @@
 package part1.lesson02.task03;
 
+import java.util.Comparator;
+
 /**
  * Create 05.05.2020
  *
@@ -8,6 +10,6 @@ package part1.lesson02.task03;
  * @autor Evtushenko Anton
  */
 
-public interface Sorter {
+public interface Sorter extends Comparator {
     public Person[] sorting(PersonStore store);
 }

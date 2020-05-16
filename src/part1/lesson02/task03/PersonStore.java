@@ -13,22 +13,6 @@ import java.util.*;
 public class PersonStore {
     private Person[] person;
 
-//    /**
-//     * This method sorts an array of the Person class by Comparator
-//     *
-//     * @param people           - sortable array of the Person class
-//     * @param personComparator - comparator for sorting the Person class
-//     *
-//     * @return - sorted a Person[]
-//     */
-//    public Person[] sortByComparator(Person[] people, Comparator personComparator) {
-//        // хитро :) но речь шла о том, чтобы реализовать два разных метода сортировки по двум разным алгоритмам сортировки
-//        Set<Person> people1 = new TreeSet<>(personComparator);
-//        people1.addAll(Arrays.asList(people));
-//
-//        return people1.toArray(new Person[people1.size()]);
-//    }
-
     public Person[] getPersons() {
         return person;
     }
@@ -39,11 +23,7 @@ public class PersonStore {
      */
     public void readyPersonArr(int quantityObjIntoArr) {
         Person[] humans = new Person[quantityObjIntoArr];
-//        humans[0] = new Person("Alex", Sex.getMAN(), 20); //This for test*
-//        humans[1] = new Person("Alex", Sex.getMAN(), 20); //
 
-        //Cycle generate  of a Person[quantityObjIntoArr]
-//        for (int i = 2; i < quantityObjIntoArr; i++) {   //This for test*
         for (int i = 0; i < quantityObjIntoArr; i++) {
             int numCharsName = (int) ((10 * Math.random()) / 3 + (10 * Math.random()) / 3 + (10 * Math.random()) / 3) + 2;
             char[] chars = "zabcdefghijklmnopqrstuvwxyza".toCharArray();
@@ -82,7 +62,29 @@ public class PersonStore {
         person = humans;
     }
 
-    public PersonStore(){}
+    /**
+     * @param sorter - comparator for sorting an array of the Person class.
+     */
+    public void runTask(Sorter sorter) {
+        System.out.println(sorter.getClass().getSimpleName());
+        Date startA = new Date();
+        Arrays.asList(sorter.sorting(this)).forEach(System.out::println);
+        Date endA = new Date();
+
+        System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
+                (endA.getTime() - startA.getTime()));
+    }
+
+    public void runTask(Comparator sorter) {
+        System.out.println(sorter.getClass().getSimpleName());
+        Date startA = new Date();
+        Arrays.sort(this.getPersons(), sorter);
+        Arrays.asList(this.getPersons()).forEach(System.out::println);
+        Date endA = new Date();
+
+        System.out.printf("\nВремя работы сортировщика составило %d мс.\n\n",
+                (endA.getTime() - startA.getTime()));
+    }
 
     public PersonStore(int i){
         readyPersonArr(i);
