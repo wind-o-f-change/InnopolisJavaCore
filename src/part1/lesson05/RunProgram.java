@@ -40,7 +40,7 @@ public class RunProgram {
         System.out.println("\nprintPets");
         petsStore.printPets();
 
-        petsStore.changeByID(4, new Pet("Anfisa", 40000));
+        petsStore.changeByID(4, new Pet("Anfisa", 10.1));
 
         System.out.println("\nprint Pets changed");
         petsStore.printPets();

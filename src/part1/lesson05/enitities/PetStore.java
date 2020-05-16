@@ -31,29 +31,20 @@ public class PetStore {
     public void changeByID(long id, Pet pet) {
         if (id < 0) throw new IllegalArgumentException("\"id\" питомца не может быть меньше нуля");
 
-        for (Map.Entry<String, Set<Pet>> entry : findByNameMap.entrySet()) {
-            String k = entry.getKey();
-            Set<Pet> v = entry.getValue();
-            for (Pet pet1 : v) {
-                if (pet1.getId() == pet.getId()) {
-                    Pet pet2 = pet1;
-                    v.remove(pet1);
+        findByNameMap.forEach((k, v) -> {
+            for (Pet pet1 : v)
+                if (id == pet1.getId()) {
                     if (pet.getWeight() > 0)
-                        pet2.setWeight(pet.getWeight());
+                        pet1.setWeight(pet.getWeight());
                     if (pet.getName() != null)
-                        pet2.setName(pet.getName());
-                    if (pet.getPerson() != null)
-                        pet2.setPerson(pet.getPerson());
+                        pet1.setName(pet.getName());
                     if (pet.getSex() != null)
-                        pet2.setSex(pet.getSex());
-                    if (pet.getName() != null)
-                        pet2.setPerson(pet.getPerson());
-                    v.add(pet2);
-                    System.out.println("Замена успешна");
+                        pet1.setSex(pet.getSex());
+                    if (pet.getPerson() != null)
+                        pet1.setPerson(pet.getPerson());
                     break;
                 }
-            }
-        }
+        });
     }
 
     public void printPets() {
