@@ -41,6 +41,11 @@ public class Pet implements Comparable<Pet> {
         this.name = name;
     }
 
+    public Pet(Person person) {
+        this();
+        this.person = person;
+    }
+
     //  Сделать всевозможные конструкторы
 
 
@@ -99,7 +104,7 @@ public class Pet implements Comparable<Pet> {
 
     @Override
     public String toString() {
-        return String.format("Pet \"%s\" \tID: %s,\tsex: %S,\tweight: %s.\tHis %s", name, id, sex, weight, person);
+        return String.format("Pet \"%s\" \tID: %s,\tsex: %S,\tweight: %s.\t\tHis %s", name, id, sex, weight, person);
     }
 
     @Override

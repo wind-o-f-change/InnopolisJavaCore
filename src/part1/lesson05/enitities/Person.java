@@ -41,7 +41,7 @@ public class Person implements Comparable<Person> {
 
     @Override
     public String toString() {
-        return String.format("person \"%s\", age: %d, sex: %S.", name, age, sex);
+        return String.format("person \"%s\",\tage: %d, sex: %S.", name, age, sex);
     }
 
     public String getName() {
