@@ -10,6 +10,6 @@ import java.util.Comparator;
  * @autor Evtushenko Anton
  */
 
-public interface Sorter extends Comparator {
+public interface Sorter extends Comparator<Person> {
     public Person[] sorting(PersonStore store);
 }

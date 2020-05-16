@@ -11,17 +11,10 @@ import java.util.Comparator;
  * @autor Evtushenko Anton
  */
 
-public class SortByPerson implements Comparator {
+public class SortByPerson implements Comparator<Pet> {
+
     @Override
-    public int compare(Object o1, Object o2) {
-        Person p1 = null;
-        Person p2 = null;
-        try {
-            p1 = (Person) ((Pet)o1).getPerson();
-            p2 = (Person) ((Pet)o2).getPerson();
-        }catch (ClassCastException e){
-            e.printStackTrace();
-        }
+    public int compare(Pet p1, Pet p2) {
         return p1.compareTo(p2);
     }
 }

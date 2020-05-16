@@ -10,12 +10,10 @@ import java.util.Comparator;
  * @autor Evtushenko Anton
  */
 
-public class SortByWeight implements Comparator {
+public class SortByWeight implements Comparator<Pet> {
 
     @Override
-    public int compare(Object o1, Object o2) {
-        Pet p1 = (Pet) o1;
-        Pet p2 = (Pet) o2;
-        return Double.compare(p1.getWeight(), p2.getWeight());
+    public int compare(Pet o1, Pet o2) {
+        return Double.compare(o1.getWeight(), o2.getWeight());
     }
 }

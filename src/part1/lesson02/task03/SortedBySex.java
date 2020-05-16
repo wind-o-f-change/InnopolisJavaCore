@@ -8,7 +8,7 @@ package part1.lesson02.task03;
  * @author Evtushenko Anton
  */
 
-public class SortedBySex <T extends Person> implements Sorter {
+public class SortedBySex implements Sorter {
     /**
      * This method sorts a "Person" array by sex from the "PersonStore" object
      * @param store the object stores a "Person" array
@@ -24,7 +24,7 @@ public class SortedBySex <T extends Person> implements Sorter {
             needIteration = false;
             int x = people.length;
             for (int i = 1; i < x; i++) {
-                if (genderPoints(people[i]) > genderPoints(people[i -1])) {
+                if (compare(people[i], people[i -1]) < 0) {
                     swap(people, i, i-1);
                     needIteration = true;
                 }
@@ -47,10 +47,7 @@ public class SortedBySex <T extends Person> implements Sorter {
     }
 
     @Override
-    public int compare(Object o1, Object o2) {
-        T a = (T) o1;
-        T b = (T) o2;
-
+    public int compare(Person a, Person b) {
         return  genderPoints(b) - genderPoints(a);
     }
 }

@@ -10,17 +10,10 @@ import java.util.Comparator;
  * @autor Evtushenko Anton
  */
 
-public class SortByName implements Comparator {
+public class SortByName implements Comparator<Pet> {
+
     @Override
-    public int compare(Object o1, Object o2) {
-        Pet p1 = null;
-        Pet p2 = null;
-        try {
-            p1 = (Pet) o1;
-            p2 = (Pet) o2;
-        }catch (ClassCastException e){
-            e.printStackTrace();
-        }
+    public int compare(Pet p1, Pet p2) {
         return p1.getName().compareTo(p2.getName());
     }
 }

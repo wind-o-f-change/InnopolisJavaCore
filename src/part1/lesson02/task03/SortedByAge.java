@@ -8,7 +8,7 @@ package part1.lesson02.task03;
  * @author Evtushenko Anton
  */
 
-public class SortedByAge <T extends Person> implements Sorter {
+public class SortedByAge implements Sorter {
     /**
      * This method sorts a "Person" array by age from the "PersonStore" object
      * @param store the object stores a "Person" array
@@ -36,12 +36,8 @@ public class SortedByAge <T extends Person> implements Sorter {
         return people;
     }
 
-
     @Override
-    public int compare(Object o1, Object o2) {
-        T a = (T) o1;
-        T b = (T) o2;
-
+    public int compare(Person a, Person b) {
         if (a.getAge() > b.getAge()) return -1;
         else if (a.getAge() < b.getAge()) return +1;
         else return 0;

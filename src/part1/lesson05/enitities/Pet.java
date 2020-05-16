@@ -8,20 +8,52 @@ import java.util.Objects;
  * @autor Evtushenko Anton
  */
 
-public class Pet implements Comparable{
-    private static int setterID = 0;
-    private final int id;
+public class Pet implements Comparable<Pet> {
+    private static long settterID = 0;
+    private final long id;
     private double weight;
     private String name;
-    private final Sex sex;
+    private Sex sex;
     private Person person;
 
+    private Pet() {
+        id = ++settterID;
+    }
+
     public Pet(String name, Sex sex, double weight, Person person) {
-        this.id = ++setterID;
+        this();
         this.weight = weight;
+        this.name = name;
         this.sex = sex;
         this.person = person;
+    }
+
+    public Pet(String name, Sex sex, Person person) {
+        this();
         this.name = name;
+        this.sex = sex;
+        this.person = person;
+    }
+
+    public Pet(String name, double weight) {
+        this();
+        this.weight = weight;
+        this.name = name;
+    }
+
+    //  Сделать всевозможные конструкторы
+
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
     public long getId() {
@@ -44,14 +76,6 @@ public class Pet implements Comparable{
         return weight;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setPerson(Person person) {
         this.person = person;
     }
@@ -60,25 +84,26 @@ public class Pet implements Comparable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pet pets = (Pet) o;
-        return id == pets.id &&
-                weight == pets.weight &&
-                sex == pets.sex;
+        Pet pet = (Pet) o;
+        return id == pet.id &&
+                Double.compare(pet.weight, weight) == 0 &&
+                Objects.equals(name, pet.name) &&
+                sex == pet.sex &&
+                Objects.equals(person, pet.person);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sex);
+        return Objects.hash(id, weight, name, sex, person);
     }
 
     @Override
     public String toString() {
-        return String.format("Pet \"%s\", ID: %d, sex: %S, weight: %s.\tHis %s", name, id, sex, weight, person);
+        return String.format("Pet \"%s\" \tID: %s,\tsex: %S,\tweight: %s.\tHis %s", name, id, sex, weight, person);
     }
 
     @Override
-    public int compareTo(Object o) {
-        Pet p = (Pet) o;
-        return Integer.compare(this.id, p.id);
+    public int compareTo(Pet p) {
+        return Long.compare(this.id, p.id);
     }
 }

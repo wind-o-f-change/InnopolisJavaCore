@@ -8,7 +8,7 @@ import part1.lesson05.enitities.Pet;
 import part1.lesson05.enitities.PetStore;
 import part1.lesson05.enitities.Sex;
 
-import java.util.TreeSet;
+import java.util.UUID;
 
 /**
  * Create 01.05.2020
@@ -40,7 +40,7 @@ public class RunProgram {
         System.out.println("\nprintPets");
         petsStore.printPets();
 
-        petsStore.changeByID(4, "Anfisa", 1.5);
+        petsStore.changeByID(4, new Pet("Anfisa", 40000));
 
         System.out.println("\nprint Pets changed");
         petsStore.printPets();
@@ -52,5 +52,7 @@ public class RunProgram {
         System.out.println("\nSortByPerson");
         petsStore.printSortedPets(new SortByPerson());
     }
-    private RunProgram(){}
+
+    private RunProgram() {
+    }
 }

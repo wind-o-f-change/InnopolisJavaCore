@@ -8,10 +8,10 @@ import java.util.Objects;
  * @autor Evtushenko Anton
  */
 
-public class Person implements Comparable {
-    private final String name;
-    private final Sex sex;
-    private final int age;
+public class Person implements Comparable<Person> {
+    private String name;
+    private Sex sex;
+    private int age;
 
     public Person(String name, Sex sex, int age) {
         this.name = name;
@@ -20,14 +20,8 @@ public class Person implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Person p1 = null;
-        try {
-            p1 = (Person) o;
-        }catch (ClassCastException e){
-            e.printStackTrace();
-        }
-        return this.name.compareTo(p1.name);
+    public int compareTo(Person o) {
+        return this.name.compareTo(o.name);
     }
 
     @Override
@@ -36,7 +30,7 @@ public class Person implements Comparable {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return age == person.age &&
-                name.equals(person.name) &&
+                Objects.equals(name, person.name) &&
                 sex == person.sex;
     }
 

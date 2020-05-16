@@ -6,7 +6,7 @@ package part1.lesson02.task03;
  * @autor Evtushenko Anton
  */
 
-public class SortedByName <T extends Person> implements Sorter{
+public class SortedByName implements Sorter{
     @Override
     public Person[] sorting(PersonStore store) {
         Person[] people = store.getPersons();
@@ -29,10 +29,7 @@ public class SortedByName <T extends Person> implements Sorter{
     }
 
     @Override
-    public int compare(Object o1, Object o2) {
-        T a = (T) o1;
-        T b = (T) o2;
-
+    public int compare(Person a, Person b) {
         return a.getName().compareTo(b.getName());
     }
 }
