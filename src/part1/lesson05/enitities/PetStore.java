@@ -25,6 +25,7 @@ public class PetStore {
     }
 
     public Set<Pet> findByName(String name) {
+        System.out.println(String.format("\nfindByName(\"%s\")", name));
         return findByNameMap.get(name);
     }
 
@@ -48,10 +49,12 @@ public class PetStore {
     }
 
     public void printPets() {
+        System.out.println("\nprint Pets changed");
         findByNameMap.forEach((k, v) -> v.forEach(System.out::println));
     }
 
     public void printSortedPets(Comparator<Pet> byComparators) {
+        System.out.println("\n" + byComparators.getClass().getSimpleName());
         TreeSet<Pet> pets = new TreeSet<>(byComparators);
         findByNameMap.forEach((k, v) -> pets.addAll(v));
         pets.forEach(System.out::println);

@@ -32,26 +32,20 @@ public class RunProgram {
         petsStore.addPet(new Pet("Murka", Sex.WOMAN, 2.0,
                 new Person("Lara", Sex.WOMAN, 12)));
 
-        System.out.println("\nfindByName(\"Dozor\")");
+
         petsStore.findByName("Dozor").forEach(System.out::println);
-        System.out.println("\nfindByName(\"Murka\")");
         petsStore.findByName("Murka").forEach(System.out::println);
 
-        System.out.println("\nprintPets");
         petsStore.printPets();
 
         petsStore.changeByID(4, new Pet("Anfisa", 1.1));
         petsStore.changeByID(1, new Pet("Pozor", 3.345));
         petsStore.changeByID(2, new Pet(new Person("Zhizh", Sex.MAN, 135)));
 
-        System.out.println("\nprint Pets changed");
         petsStore.printPets();
 
-        System.out.println("\nSortByName");
         petsStore.printSortedPets(new SortByName());
-        System.out.println("\nSortByWeight");
         petsStore.printSortedPets(new SortByWeight());
-        System.out.println("\nSortByPerson");
         petsStore.printSortedPets(new SortByPerson());
     }
 
