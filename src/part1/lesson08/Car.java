@@ -9,6 +9,8 @@ import java.io.*;
  */
 
 public class Car implements Serializable {
+
+
     private static long serialVersionUID = 1L;
     int speed;
     String name;
@@ -18,31 +20,40 @@ public class Car implements Serializable {
         System.out.println("bee - bee");
     }
 
-    public static void main(String[] args) {
-        Car car = new Car(250, "Uaz", new Wheel(20));
-
-        ObjectOutputStream ous;
-        ObjectInputStream ois;
-        Car car2 = null;
-        try {
-            ous = new ObjectOutputStream(new FileOutputStream("Car"));
-            ous.writeObject(car);
-
-            ois = new ObjectInputStream(new FileInputStream("Car"));
-            car2 = (Car) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("УПС /-_-/");
+    static void serialize(Object object, String file) {
+        try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(file))) {
+            ous.writeObject(object);
+        } catch (IOException e) {
+            System.out.println("Упс ...serialize... /-_-/");
             e.printStackTrace();
         }
 
-        System.out.println(car);
-        car.beep();
-        car.wheel.print();
+    }
 
-        System.out.println(car2);
-        car2.beep();
-        car2.wheel.print();
+    static Object deSerialize(String file) {
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file));
+        } catch (IOException e) {
+            System.out.println("Упс ...deSerialize... /-_-/");
+            e.printStackTrace();
+        }
+        Object obj = null;
+        try {
+            obj = ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Упс ...IOException... 3 /-_-/");
+                e.printStackTrace();
+            }
+        }
+        return obj;
     }
 
     public Car(int speed, String name, Wheel wheel) {
