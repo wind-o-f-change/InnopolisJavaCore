@@ -20,7 +20,7 @@ public class Pet implements Comparable<Pet> {
         id = ++settterID;
     }
 
-    public Pet(double weight, String name, Sex sex, Person person) {
+    public Pet(String name, Sex sex, double weight, Person person) {
         this();
         this.weight = weight;
         this.name = name;
