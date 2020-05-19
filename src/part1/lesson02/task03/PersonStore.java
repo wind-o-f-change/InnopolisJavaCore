@@ -75,7 +75,7 @@ public class PersonStore {
                 (endA.getTime() - startA.getTime()));
     }
 
-    public void runTask(Comparator sorter) {
+    public void runTask(Comparator<Person> sorter) {
         System.out.println(sorter.getClass().getSimpleName());
         Date startA = new Date();
         Arrays.sort(this.getPersons(), sorter);
