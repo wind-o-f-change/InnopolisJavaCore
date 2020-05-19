@@ -20,12 +20,19 @@ public class Pet implements Comparable<Pet> {
         id = ++settterID;
     }
 
-    public Pet(String name, Sex sex, double weight, Person person) {
+    public Pet(double weight, String name, Sex sex, Person person) {
         this();
         this.weight = weight;
         this.name = name;
         this.sex = sex;
         this.person = person;
+    }
+
+    public Pet(double weight, String name, Sex sex) {
+        this();
+        this.weight = weight;
+        this.name = name;
+        this.sex = sex;
     }
 
     public Pet(String name, Sex sex, Person person) {
@@ -41,13 +48,55 @@ public class Pet implements Comparable<Pet> {
         this.name = name;
     }
 
+    public Pet(double weight, Sex sex) {
+        this();
+        this.weight = weight;
+        this.sex = sex;
+    }
+
+    public Pet(double weight, Person person) {
+        this();
+        this.weight = weight;
+        this.person = person;
+    }
+
+    public Pet(double weight) {
+        this();
+        this.weight = weight;
+    }
+
+    public Pet(String name, Sex sex) {
+        this();
+        this.name = name;
+        this.sex = sex;
+    }
+
+    public Pet(String name, Person person) {
+        this();
+        this.name = name;
+        this.person = person;
+    }
+
+    public Pet(String name) {
+        this();
+        this.name = name;
+    }
+
+    public Pet(Sex sex, Person person) {
+        this();
+        this.sex = sex;
+        this.person = person;
+    }
+
+    public Pet(Sex sex) {
+        this();
+        this.sex = sex;
+    }
+
     public Pet(Person person) {
         this();
         this.person = person;
     }
-
-    //  Сделать всевозможные конструкторы
-
 
     public void setWeight(double weight) {
         this.weight = weight;
