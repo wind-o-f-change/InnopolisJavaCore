@@ -15,6 +15,6 @@ public class SortByPerson implements Comparator<Pet> {
 
     @Override
     public int compare(Pet p1, Pet p2) {
-        return p1.compareTo(p2);
+        return p1.getPerson().compareTo(p2.getPerson());
     }
 }
