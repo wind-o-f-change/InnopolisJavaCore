@@ -41,34 +41,34 @@ public class PetStore {
                     found = true;
                     boolean validation = false;
 
-                        if (pet.getWeight() > 0 & (pet.getWeight() != pet1.getWeight())) {
+                        if (pet.getWeight() > 0 && (pet.getWeight() != pet1.getWeight())) {
                             pet1.setWeight(pet.getWeight());
                             validation = true;
                         }
 
-                    try {
-                        if (pet.getName() != null & !pet.getName().equals(pet1.getName())) {
+//                    try {
+                        if (pet.getName() != null && !pet.getName().equals(pet1.getName())) {
                             pet1.setName(pet.getName());
                             validation = true;
                         }
-                    } catch (NullPointerException e){
-                    }
+//                    } catch (NullPointerException e){
+//                    }
 
-                    try {
-                        if (pet.getSex() != null & !pet.getSex().equals(pet1.getSex())) {
+//                    try {
+                        if (pet.getSex() != null && !pet.getSex().equals(pet1.getSex())) {
                             pet1.setSex(pet.getSex());
                             validation = true;
                         }
-                    } catch (NullPointerException e){
-                    }
+//                    } catch (NullPointerException e){
+//                    }
 
-                    try {
-                        if (pet.getPerson() != null & !(Objects.equals(pet.getPerson(), pet1.getPerson()))) {
+//                    try {
+                        if (pet.getPerson() != null && !(Objects.equals(pet.getPerson(), pet1.getPerson()))) {
                             pet1.setPerson(pet.getPerson());
                             validation = true;
                         }
-                    } catch (NullPointerException e){
-                    }
+//                    } catch (NullPointerException e){
+//                    }
 
                     if (validation) {
                         System.out.println(String.format("Изменяемые параметры питомца \"%s\" успешно сохранены", pet1.getName()));
