@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Pet implements Comparable<Pet> {
     private static long settterID = 0;
-    private final long id;
+    private long id;
     private double weight;
     private String name;
     private Sex sex;
@@ -77,8 +77,8 @@ public class Pet implements Comparable<Pet> {
         this.person = person;
     }
 
-    public Pet(String name) {
-        this();
+    public Pet(long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -93,8 +93,8 @@ public class Pet implements Comparable<Pet> {
         this.sex = sex;
     }
 
-    public Pet(Person person) {
-        this();
+    public Pet(long id, Person person) {
+        this.id = id;
         this.person = person;
     }
 
