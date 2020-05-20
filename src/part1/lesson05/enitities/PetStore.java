@@ -74,7 +74,7 @@ public class PetStore {
                     }
 
                     if (validation) {
-                        System.out.println("Изменяемые параметры успешно сохранены");
+                        System.out.println(String.format("Изменяемые параметры питомца \"%s\" успешно сохранены", pet1.getName()));
                         break;
                     } else throw new IllegalArgumentException("Поля для изменения не заданы");
                 }
