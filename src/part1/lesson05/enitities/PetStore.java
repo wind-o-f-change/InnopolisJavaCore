@@ -41,14 +41,10 @@ public class PetStore {
                     found = true;
                     boolean validation = false;
 
-                    try {
                         if (pet.getWeight() > 0 & (pet.getWeight() != pet1.getWeight())) {
                             pet1.setWeight(pet.getWeight());
                             validation = true;
-                        }
-                    } catch (NullPointerException e){
                     }
-
                     try {
                         if (pet.getName() != null & !pet.getName().equals(pet1.getName())) {
                             pet1.setName(pet.getName());
