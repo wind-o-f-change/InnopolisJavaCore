@@ -41,28 +41,41 @@ public class PetStore {
                     isFound = true;
                     boolean validation = false;
 
-                        if (pet.getWeight() > 0 && (pet.getWeight() != pet1.getWeight())) {
-                            pet1.setWeight(pet.getWeight());
-                            validation = true;
-                        }
+                    boolean isWeight = false;
+                    if (pet.getWeight() > 0 && (pet.getWeight() != pet1.getWeight())) {
+                        pet1.setWeight(pet.getWeight());
+                        validation = true;
+                        isWeight = true;
+                    }
 
-                        if (pet.getName() != null && !pet.getName().equals(pet1.getName())) {
-                            pet1.setName(pet.getName());
-                            validation = true;
-                        }
+                    boolean isName = false;
+                    if (pet.getName() != null && !pet.getName().equals(pet1.getName())) {
+                        pet1.setName(pet.getName());
+                        validation = true;
+                        isName = true;
+                    }
 
-                        if (pet.getSex() != null && !pet.getSex().equals(pet1.getSex())) {
-                            pet1.setSex(pet.getSex());
-                            validation = true;
-                        }
+                    boolean isSex = false;
+                    if (pet.getSex() != null && !pet.getSex().equals(pet1.getSex())) {
+                        pet1.setSex(pet.getSex());
+                        validation = true;
+                        isSex = true;
+                    }
 
-                        if (pet.getPerson() != null && !(Objects.equals(pet.getPerson(), pet1.getPerson()))) {
-                            pet1.setPerson(pet.getPerson());
-                            validation = true;
-                        }
+                    boolean isPerson = false;
+                    if (pet.getPerson() != null && !(Objects.equals(pet.getPerson(), pet1.getPerson()))) {
+                        pet1.setPerson(pet.getPerson());
+                        validation = true;
+                        isPerson = true;
+                    }
 
                     if (validation) {
-                        System.out.println(String.format("Изменяемые параметры питомца \"%s\" успешно сохранены", pet1.getName()));
+                        StringBuilder sb = new StringBuilder("");
+                        if (isWeight) sb.append(" \"Weight\"");
+                        if (isName) sb.append(" \"Name\"");
+                        if (isSex) sb.append(" \"Sex\"");
+                        if (isPerson) sb.append(" \"Person\"");
+                        System.out.println(String.format("\nИзменяемые параметры питомца \"%s\" успешно сохранены\nИзменены следующие параметры :%s", pet1.getName(), sb.toString()));
                         break;
                     } else throw new IllegalArgumentException("Поля для изменения не заданы");
                 }
