@@ -1,29 +1,31 @@
 package part1.lesson08;
 
-import java.io.Serializable;
-
 /**
  * Create 17.05.2020
  *
  * @autor Evtushenko Anton
  */
 
-public class Wheel implements Serializable {
-    private static long serialVersionUID = 1L;
+public class Wheel {
     int diameter;
+    private String width;
 
     void print() {
-        System.out.println("I'm wheel");
+        System.out.println("\tI'm wheel");
     }
 
-    public Wheel(int diameter) {
+    public Wheel(int diameter, String width) {
         this.diameter = diameter;
+        this.width = width;
     }
+
+    public Wheel(){}
 
     @Override
     public String toString() {
         return "Wheel{" +
                 "diameter=" + diameter +
+                ", width='" + width + '\'' +
                 '}';
     }
 }
