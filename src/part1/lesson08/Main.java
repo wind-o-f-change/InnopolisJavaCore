@@ -13,8 +13,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-//        Car car = new Car(2120, "Uazik", new Wheel(25, "225", new Bolt("\"Mounting bolt\"")));
-        Car car = new Car(2120, "Uazik", new Wheel(25, "225"));//, new Bolt("\"Mounting bolt\"")));
+        Car car = new Car(2120, "Uaz", new Wheel(25, "225"));
 
         String carObj = "Car";
         serialize(car, carObj);
@@ -29,7 +28,13 @@ public class Main {
         car2.wheel.print();
     }
 
-    static void serialize(Object object, String file) {
+    /**
+     * This method serialized "object" through reflection API.
+     *
+     * @param object a serializable object
+     * @param file   a path to an object file
+     */
+    private static void serialize(Object object, String file) {
         try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(file))) {
             // Алгоритм копирования объекта на один уровень вложенности
             Field[] fields = object.getClass().getDeclaredFields();
@@ -45,22 +50,21 @@ public class Main {
                 } else {
                     serializeTwo(field.get(object), ous);
                 }
-//                else {
-//                    Field[] fields2 = o.getClass().getDeclaredFields();
-//                    for (Field field2 : fields2) {
-//                        field2.setAccessible(true);
-//                        ous.writeObject(field2.get(o));
-//                    }
-//                }
             }
         } catch (IOException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
 
-    static void serializeTwo(Object object, ObjectOutputStream ous) {
+    /**
+     * This method serialized "object" through reflection API.
+     * It is used for serializing a nested object.
+     *
+     * @param object a serializable object
+     * @param ous    a stream to an object file for serialization
+     */
+    private static void serializeTwo(Object object, ObjectOutputStream ous) {
         try {
-            // Алгоритм копирования объекта на один уровень вложенности
             Field[] fields = object.getClass().getDeclaredFields();
             for (Field field : fields) {
                 field.setAccessible(true);
@@ -71,8 +75,6 @@ public class Main {
 
                 } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
                     ous.writeObject(field.get(object));
-                } else {
-                    serializeTwo(field.get(object), ous);
                 }
             }
         } catch (IOException | IllegalAccessException e) {
@@ -80,7 +82,15 @@ public class Main {
         }
     }
 
-    static Object deSerialize(String file, Class<?> clazz) {
+    /**
+     * This method deserialize "object" through reflection API.
+     *
+     * @param file  a path to an object file of his to be deserializable
+     * @param clazz a class of an object to be deserializable.
+     *
+     * @return
+     */
+    private static Object deSerialize(String file, Class<?> clazz) {
         Object obj = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             obj = clazz.newInstance();
@@ -91,16 +101,13 @@ public class Main {
                 field.setAccessible(true);
 
                 Class<?> oClass = field.getType();
-//                Object zxc = null;
 
                 if (field.getType().isPrimitive() || oClass.getSuperclass().getSimpleName().equals("Number")) {
                     field.set(obj, ois.readObject());
                 } else if (Arrays.asList(oClass.getInterfaces()).contains(Serializable.class)) {
                     field.set(obj, ois.readObject());
                 } else {
-//                    String s = field.getType().getSimpleName();
-                    deSerializeTwo(field, obj, ois);
-//                    deSerialize(ois, ois.readObject().getClass());
+                    deSerializeTwo(obj, field, ois);
                 }
             }
         } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
@@ -109,9 +116,19 @@ public class Main {
         return obj;
     }
 
-    static void deSerializeTwo(Field field, Object changeVal, ObjectInputStream ois) {
+    /**
+     * This method deserialize "object" through reflection API.
+     * It is used for serializing a nested object.
+     *
+     * @param changeField
+     * @param changeValue an object which to be deserialize
+     * @param ois         a stream to an object file for deserialization
+     *
+     * @return
+     */
+    private static void deSerializeTwo(Object changeValue, Field changeField, ObjectInputStream ois) {
         try {
-            Class<?> type = field.getType();
+            Class<?> type = changeField.getType();
             Object obj = type.newInstance();
             Field[] fields2 = type.getDeclaredFields();
 
@@ -125,10 +142,10 @@ public class Main {
                 } else if (Arrays.asList(o2Class.getInterfaces()).contains(Serializable.class)) {
                     field2.set(obj, ois.readObject());
                 } else {
-                    deSerializeTwo(field2, obj, ois);
+                    deSerializeTwo(obj, field2, ois);
                 }
             }
-            field.set(changeVal, obj);
+            changeField.set(changeValue, obj);
         } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
