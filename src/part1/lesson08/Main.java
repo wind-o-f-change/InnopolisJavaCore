@@ -19,7 +19,7 @@ public class Main {
         serialize(car, carObj);
         Car car2 = (Car) deSerialize(carObj, Car.class);
 
-        System.out.println("\nIt's an original UAZ\n\t" + car);
+        System.out.println("\nIt's an original Uaz\n\t" + car);
         car.beep();
         car.wheel.print();
 
