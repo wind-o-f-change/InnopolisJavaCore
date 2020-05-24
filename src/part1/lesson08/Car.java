@@ -8,16 +8,13 @@ import java.io.*;
  * @autor Evtushenko Anton
  */
 
-public class Car implements Serializable {
-
-
-    private static long serialVersionUID = 1L;
+public class Car {
     private int speed;
     String name;
     Wheel wheel;
 
     void beep() {
-        System.out.println("bee - bee");
+        System.out.println("\tbee - bee");
     }
 
     public Car(){}
@@ -28,12 +25,18 @@ public class Car implements Serializable {
         this.wheel = wheel;
     }
 
+
+    public Car(int speed, String name) {
+        this.speed = speed;
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "speed=" + speed +
                 ", name='" + name + '\'' +
-                ", wheel=" + wheel +
+                ", wheel= " + wheel +
                 '}';
     }
 }
