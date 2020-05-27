@@ -13,6 +13,5 @@ public class RunGettingFiles {
             new Generator().getFiles("D:/OOP/Inno/",5, 55000, 10
                     //такой массив выбран для наглядности
                     , new String[]{" $_One_$ ", " $_Two_$ ", " $_Tree_$ "});
-
     }
 }
