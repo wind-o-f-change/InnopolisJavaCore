@@ -45,6 +45,7 @@ public class Main {
                 if (oClass.isPrimitive() || oClass.getSuperclass().getSimpleName().equals("Number")) {
                     ous.writeObject(field.get(object));
 
+                    //Boolean отработает здесь
                 } else if (Arrays.asList(oClass.getInterfaces()).contains(Serializable.class)) {
                     ous.writeObject(field.get(object));
                 } else {
