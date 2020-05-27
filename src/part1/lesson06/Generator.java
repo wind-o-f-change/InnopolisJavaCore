@@ -98,7 +98,7 @@ public class Generator {
                 isFirst = false;
             }
 
-            sentence = sentence.append(wordGen(isFirst, random));
+            sentence.append(wordGen(isFirst, random));
 
             if (i != cycle - 1) sentence.append(' ');
         }
