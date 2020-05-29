@@ -49,7 +49,6 @@ public class Sorter {
                 for (String v : strings) {
                     br.write(v);
                     br.newLine();
-                    System.out.println(v);
                 }
             } else throw new AccessException("File can't write ./-_-/. ");
 
