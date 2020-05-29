@@ -16,6 +16,9 @@ import java.util.Random;
  */
 
 public class Generator {
+    private Random random = new Random();
+    private char[] chars = ".!?".toCharArray();
+    private char[] letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     /**
      * The method that creates "n" files of a given size in the "path" directory
@@ -32,11 +35,12 @@ public class Generator {
             for (int i = 0; i < n; i++) {
                 Path directoryPath = Paths.get(path);
                 File directory = directoryPath.toFile();
-                Path filePath = Paths.get(path + i + ".txt");
+                Path filePath = Paths.get(path + '/' + i + ".txt");
 
                 if (!directory.exists()) {
                     Files.createDirectory(directoryPath);
                 }
+
                 if (directory.canWrite()) {
                     Files.write(filePath, getFile(size, probability, words), StandardOpenOption.CREATE);
                 } else throw new AccessException("Files can't write -> Access Exception");
@@ -44,44 +48,37 @@ public class Generator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Files are recorded !!!");
+        System.out.println("Task 2 completed\n\tFiles are recorded !!!");
     }
 
     private byte[] getFile(int size, int probability, String[] randomWords) {
         StringBuilder file = new StringBuilder(size);
-        Random random = new Random();
-        int remainingSize = size;
 
-        while (remainingSize > 0) {
-            String s = paragraphGen(remainingSize - 2, probability, randomWords);
-            file.append(s);
-            file.append("\n\t");
-            remainingSize -= (s.length() + 2);
+        while (size - file.length() > 0) {
+            file.append(paragraphGen((size - file.length()) - 2, probability, randomWords));
+            file.append("\r\n");
         }
+
         int fileLength = file.length();
-        char[] chars = ".!?".toCharArray();
         file.setCharAt(fileLength - 2, chars[random.nextInt(3)]);
         file.setCharAt(fileLength - 1, ' ');
 
-        if (file.length() != size)
-            throw new IllegalArgumentException(" Упс !!! file capacity is: " + file.length() + " != " + size);
+        if (fileLength != size)
+            throw new IllegalArgumentException(" Упс !!! file capacity is: " + fileLength + " != " + size);
         return file.toString().getBytes();
     }
 
     private String paragraphGen(int remainingSize, int probability, String[] randomWords) {
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder paragraph = new StringBuilder();
 
         for (int i = 0; i < random.nextInt(20) + 1; i++) {
-            sb.append(sentenceGen(probability, randomWords, random));
-            if (sb.length() > remainingSize) return sb.substring(0, remainingSize);
+            paragraph.append(sentenceGen(probability, randomWords));
+            if (paragraph.length() > remainingSize) return paragraph.substring(0, remainingSize);
         }
-        return sb.toString();
+        return paragraph.toString();
     }
 
-    private String sentenceGen(int probability, String[] randomWords, Random random) {
-
-        boolean isFirst = false;
+    private String sentenceGen(int probability, String[] randomWords) {
         StringBuilder sentence = new StringBuilder();
 
         int cycle = random.nextInt(15) + 1;
@@ -92,18 +89,11 @@ public class Generator {
                 continue;
             }
 
-            if (i == 0) {
-                isFirst = true;
-            } else if (i == 1) {
-                isFirst = false;
-            }
-
-            sentence.append(wordGen(isFirst, random));
+            sentence.append(wordGen((i == 0)));
 
             if (i != cycle - 1) sentence.append(' ');
         }
 
-        char[] chars = ".!?".toCharArray();
         sentence.append(
                 chars[random.nextInt(3)]
         );
@@ -113,16 +103,15 @@ public class Generator {
         return sentence.toString();
     }
 
-    private String wordGen(boolean isFirst, Random random) {
+    private String wordGen(boolean isFirst) {
 
         int numCharsName = random.nextInt(15) + 1;
-        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         StringBuilder word = new StringBuilder(numCharsName);
 
         // Word creation cycle
         boolean toUpper = isFirst;
         for (int i = 0; i < numCharsName; i++) {
-            char c = chars[random.nextInt(chars.length)];
+            char c = letters[random.nextInt(letters.length)];
 
             if (toUpper && i == 0) {
                 word.append(String.valueOf(c).toUpperCase());

@@ -25,7 +25,7 @@ public class Wheel {
     public String toString() {
         return "Wheel{" +
                 "diameter=" + diameter +
-                ", width='" + width + '\'' +
+                ", width='" + width +
                 '}';
     }
 }

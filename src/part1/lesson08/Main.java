@@ -76,6 +76,8 @@ public class Main {
 
                 } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
                     ous.writeObject(field.get(object));
+                } else {
+                    serializeTwo(field.get(object), ous);
                 }
             }
         } catch (IOException | IllegalAccessException e) {
