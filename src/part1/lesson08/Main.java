@@ -36,23 +36,14 @@ public class Main {
      */
     private static void serialize(Object object, String file) {
         try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(file))) {
-            // Алгоритм копирования объекта на один уровень вложенности
+            // Алгоритм копирования объекта
+            Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
             Field[] fields = object.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
 
-                Class<?> oClass = field.get(object).getClass();
-                if (oClass.isPrimitive() || oClass.getSuperclass().getSimpleName().equals("Number")) {
-                    ous.writeObject(field.get(object));
+            serializator(object, parentFields, ous);
+            serializator(object, fields, ous);
 
-                    //Boolean отработает здесь
-                } else if (Arrays.asList(oClass.getInterfaces()).contains(Serializable.class)) {
-                    ous.writeObject(field.get(object));
-                } else {
-                    serializeTwo(field.get(object), ous);
-                }
-            }
-        } catch (IOException | IllegalAccessException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -65,24 +56,12 @@ public class Main {
      * @param ous    a stream to an object file for serialization
      */
     private static void serializeTwo(Object object, ObjectOutputStream ous) {
-        try {
-            Field[] fields = object.getClass().getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
 
-                Class<?> clazz = field.get(object).getClass();
-                if (clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number")) {
-                    ous.writeObject(field.get(object));
+        Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
+        Field[] fields = object.getClass().getDeclaredFields();
 
-                } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
-                    ous.writeObject(field.get(object));
-                } else {
-                    serializeTwo(field.get(object), ous);
-                }
-            }
-        } catch (IOException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        serializator(object, parentFields, ous);
+        serializator(object, fields, ous);
     }
 
     /**
@@ -98,22 +77,13 @@ public class Main {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
             obj = clazz.newInstance();
 
+            Field[] parentFields = clazz.getSuperclass().getDeclaredFields();
             Field[] fields = clazz.getDeclaredFields();
 
-            for (Field field : fields) {
-                field.setAccessible(true);
+            deSerializator(obj, parentFields, ois);
+            deSerializator(obj, fields, ois);
 
-                Class<?> oClass = field.getType();
-
-                if (field.getType().isPrimitive() || oClass.getSuperclass().getSimpleName().equals("Number")) {
-                    field.set(obj, ois.readObject());
-                } else if (Arrays.asList(oClass.getInterfaces()).contains(Serializable.class)) {
-                    field.set(obj, ois.readObject());
-                } else {
-                    deSerializeTwo(obj, field, ois);
-                }
-            }
-        } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+        } catch (IOException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
         return obj;
@@ -133,23 +103,55 @@ public class Main {
         try {
             Class<?> type = changeField.getType();
             Object obj = type.newInstance();
-            Field[] fields2 = type.getDeclaredFields();
 
-            for (Field field2 : fields2) {
-                field2.setAccessible(true);
+            Field[] parentFields = type.getSuperclass().getDeclaredFields();
+            Field[] fields = type.getDeclaredFields();
 
-                Class<?> o2Class = field2.getType();
+            deSerializator(obj, parentFields, ois);
+            deSerializator(obj, fields, ois);
 
-                if (field2.getType().isPrimitive() || o2Class.getSuperclass().getSimpleName().equals("Number")) {
-                    field2.set(obj, ois.readObject());
+            changeField.set(changeValue, obj);
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deSerializator(Object obj, Field[] fields, ObjectInputStream ois) {
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            Class<?> o2Class = field.getType();
+            try {
+
+                if (field.getType().isPrimitive() || o2Class.getSuperclass().getSimpleName().equals("Number")) {
+                    field.set(obj, ois.readObject());
                 } else if (Arrays.asList(o2Class.getInterfaces()).contains(Serializable.class)) {
-                    field2.set(obj, ois.readObject());
+                    field.set(obj, ois.readObject());
                 } else {
-                    deSerializeTwo(obj, field2, ois);
+                    deSerializeTwo(obj, field, ois);
+                }
+            } catch (IllegalAccessException | IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void serializator(Object object, Field[] fields, ObjectOutputStream ous) {
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+
+                Class<?> clazz = field.get(object).getClass();
+                if (clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number")) {
+                    ous.writeObject(field.get(object));
+
+                } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
+                    ous.writeObject(field.get(object));
+                } else {
+                    serializeTwo(field.get(object), ous);
                 }
             }
-            changeField.set(changeValue, obj);
-        } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+        } catch (IOException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
