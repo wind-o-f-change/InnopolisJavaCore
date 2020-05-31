@@ -46,7 +46,7 @@ public class RuntimeCompile {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         compiler.run(null, null, null, sourceFile.getPath());
 
-        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURI().toURL()});
+        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURL()});
         Class<?> cls = Class.forName("OOP.SomeClass", true, classLoader);
         Object instance = cls.newInstance();
         ((Worker) instance).doWork();
