@@ -103,19 +103,16 @@ public class Generator {
         return sentence.toString();
     }
 
-    private String wordGen(boolean isFirst) {
+    private String wordGen(boolean toUpper) {
 
         int numCharsName = random.nextInt(15) + 1;
         StringBuilder word = new StringBuilder(numCharsName);
 
-        // Word creation cycle
-        boolean toUpper = isFirst;
         for (int i = 0; i < numCharsName; i++) {
             char c = letters[random.nextInt(letters.length)];
 
             if (toUpper && i == 0) {
                 word.append(String.valueOf(c).toUpperCase());
-                toUpper = false;
             } else word.append(c);
         }
         return word.toString();

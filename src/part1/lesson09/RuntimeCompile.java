@@ -17,7 +17,7 @@ import java.nio.file.StandardOpenOption;
 
 public class RuntimeCompile {
     public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-        StringBuilder source = new StringBuilder(64);
+        StringBuilder source = new StringBuilder();
         source.append("package OOP;\n");
         source.append("\n");
         source.append("import part1.lesson09.Worker;\n");

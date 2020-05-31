@@ -25,8 +25,7 @@ public class Sorter {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(readingFile)))) {
             while (br.ready()) {
-                List<String> arrayStr = Arrays.asList(br.readLine().split("\\p{Punct}"));
-                arrayStr.forEach(v -> strings.addAll(Arrays.asList(v.split(" "))));
+                strings.addAll(Arrays.asList(br.readLine().split("\\W")));
             }
 
         } catch (IOException e) {
