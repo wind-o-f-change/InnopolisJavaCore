@@ -2,9 +2,10 @@ package part1.lesson09;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
-import java.io.*;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -18,7 +19,7 @@ import java.nio.file.StandardOpenOption;
 public class RuntimeCompile {
     public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         StringBuilder source = new StringBuilder();
-        source.append("package OOP;\n");
+//        source.append("package ;\n");
         source.append("\n");
         source.append("import part1.lesson09.Worker;\n");
         source.append("\n");
@@ -39,15 +40,16 @@ public class RuntimeCompile {
         source.append("    }\n");
         source.append("}\n");
 
-        File root = new File("D:\\");
-        File sourceFile = new File(root, "OOP\\SomeClass.java");
+        File root = new File("./");
+        root.mkdirs();
+        File sourceFile = new File(root, "SomeClass.java");
         Files.write(sourceFile.toPath(), source.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         compiler.run(null, null, null, sourceFile.getPath());
 
-        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURL()});
-        Class<?> cls = Class.forName("OOP.SomeClass", true, classLoader);
+//        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURL()});
+        Class<?> cls = new MyLoader().loadClass("SomeClass");
         Object instance = cls.newInstance();
         ((Worker) instance).doWork();
     }
