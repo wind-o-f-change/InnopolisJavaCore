@@ -19,8 +19,7 @@ import java.nio.file.StandardOpenOption;
 public class RuntimeCompile {
     public static void main(String[] args) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         StringBuilder source = new StringBuilder();
-//        source.append("package ;\n");
-        source.append("\n");
+
         source.append("import part1.lesson09.Worker;\n");
         source.append("\n");
         source.append("public class SomeClass implements Worker {\n");
@@ -41,14 +40,12 @@ public class RuntimeCompile {
         source.append("}\n");
 
         File root = new File("./");
-        root.mkdirs();
         File sourceFile = new File(root, "SomeClass.java");
         Files.write(sourceFile.toPath(), source.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         compiler.run(null, null, null, sourceFile.getPath());
 
-//        URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{root.toURL()});
         Class<?> cls = new MyLoader().loadClass("SomeClass");
         Object instance = cls.newInstance();
         ((Worker) instance).doWork();
