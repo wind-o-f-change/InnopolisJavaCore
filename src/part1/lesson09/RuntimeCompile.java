@@ -39,7 +39,7 @@ public class RuntimeCompile {
         source.append("    }\n");
         source.append("}\n");
 
-        File root = new File("./");
+        File root = new File("./src/part1/lesson09");
         File sourceFile = new File(root, "SomeClass.java");
         Files.write(sourceFile.toPath(), source.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 

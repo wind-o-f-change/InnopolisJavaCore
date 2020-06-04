@@ -24,7 +24,7 @@ public class MyLoader extends ClassLoader {
 
         if ("SomeClass".equals(name)) {
             try {
-                byte[] clazz = Files.readAllBytes(Paths.get("./SomeClass.class"));
+                byte[] clazz = Files.readAllBytes(Paths.get("./src/part1/lesson09/SomeClass.class"));
                 return defineClass(name, clazz, 0, clazz.length);
 
             } catch (IOException e) {
