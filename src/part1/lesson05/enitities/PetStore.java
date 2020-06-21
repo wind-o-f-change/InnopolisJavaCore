@@ -1,7 +1,10 @@
 package part1.lesson05.enitities;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Create 01.05.2020
@@ -26,7 +29,8 @@ public class PetStore {
     }
 
     public Set<Pet> findByName(String name) {
-        System.out.println(String.format("\nfindByName(\"%s\")", name));
+        Consumer<String> soutName = n -> System.out.println(String.format("\nfindByName(\"%s\")", n));
+        soutName.accept(name);
         return findByNameMap.get(name);
     }
 
@@ -42,29 +46,41 @@ public class PetStore {
                     boolean validation = false;
 
                     boolean isWeight = false;
-                    if (pet.getWeight() > 0 && (pet.getWeight() != pet1.getWeight())) {
-                        pet1.setWeight(pet.getWeight());
+                    Predicate<Double> weightNotNull = w -> w > 0;
+                    double weight = pet.getWeight();
+                    Predicate<Double> weightNotEquals = w -> w != weight;
+                    if (weightNotNull.test(weight) && weightNotEquals.test(pet1.getWeight())) {
+                        pet1.setWeight(weight);
                         validation = true;
                         isWeight = true;
                     }
 
                     boolean isName = false;
-                    if (pet.getName() != null && !pet.getName().equals(pet1.getName())) {
-                        pet1.setName(pet.getName());
+                    Predicate<String> nameNotNull = Objects::nonNull;
+                    String name = pet.getName();
+                    Predicate<String> nameNotEquals = n -> !n.equals(name);
+                    if (nameNotNull.test(name) && nameNotEquals.test(pet1.getName())) {
+                        pet1.setName(name);
                         validation = true;
                         isName = true;
                     }
 
                     boolean isSex = false;
-                    if (pet.getSex() != null && !pet.getSex().equals(pet1.getSex())) {
-                        pet1.setSex(pet.getSex());
+                    Predicate<Sex> sexNotNull = Objects::nonNull;
+                    Sex sex = pet.getSex();
+                    Predicate<Sex> sexEquals = s -> Objects.equals(s, sex);
+                    if (sexNotNull.test(sex) && sexEquals.negate().test(pet1.getSex())) {
+                        pet1.setSex(sex);
                         validation = true;
                         isSex = true;
                     }
 
                     boolean isPerson = false;
-                    if (pet.getPerson() != null && !(Objects.equals(pet.getPerson(), pet1.getPerson()))) {
-                        pet1.setPerson(pet.getPerson());
+                    Predicate<Person> perNotNull = Objects::nonNull;
+                    Person person = pet.getPerson();
+                    Predicate<Person> perNotEquals = p -> !Objects.equals(person, p);
+                    if (perNotNull.test(person) && perNotEquals.test(pet1.getPerson())) {
+                        pet1.setPerson(person);
                         validation = true;
                         isPerson = true;
                     }
@@ -86,14 +102,21 @@ public class PetStore {
 
     public void printPets() {
         System.out.println("\nprint Pets");
-        findByNameMap.forEach((k, v) -> v.forEach(System.out::println));
+        findByNameMap.values().forEach(System.out::println);
     }
 
     public void printSortedPets(Comparator<Pet> byComparators) {
-        System.out.println("\n" + byComparators.getClass().getSimpleName());
-        TreeSet<Pet> pets = new TreeSet<>(byComparators);
-        findByNameMap.forEach((k, v) -> pets.addAll(v));
-        pets.forEach(System.out::println);
+        Function<Comparator<Pet>, String> comparatorToString = petComparator -> petComparator.getClass().getSimpleName();
+
+        Consumer<String> souter = petComparator -> System.out.println("\n" + petComparator);
+        souter.accept(comparatorToString.apply(byComparators));
+
+        List<Pet> pets = new ArrayList<>();
+        findByNameMap.values().forEach(pets::addAll);
+
+        pets.stream()
+                .sorted(byComparators)
+                .forEach(System.out::println);
     }
 
     public Map<String, Set<Pet>> getPets() {
