@@ -64,6 +64,26 @@ public class Main {
         serializator(object, fields, ous);
     }
 
+    private static void serializator(Object object, Field[] fields, ObjectOutputStream ous) {
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+
+                Class<?> clazz = field.get(object).getClass();
+                if (clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number")) {
+                    ous.writeObject(field.get(object));
+
+                } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
+                    ous.writeObject(field.get(object));
+                } else {
+                    serializeTwo(field.get(object), ous);
+                }
+            }
+        } catch (IOException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method deserialize "object" through reflection API.
      *
@@ -133,26 +153,6 @@ public class Main {
             } catch (IllegalAccessException | IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private static void serializator(Object object, Field[] fields, ObjectOutputStream ous) {
-        try {
-            for (Field field : fields) {
-                field.setAccessible(true);
-
-                Class<?> clazz = field.get(object).getClass();
-                if (clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number")) {
-                    ous.writeObject(field.get(object));
-
-                } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
-                    ous.writeObject(field.get(object));
-                } else {
-                    serializeTwo(field.get(object), ous);
-                }
-            }
-        } catch (IOException | IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 }
