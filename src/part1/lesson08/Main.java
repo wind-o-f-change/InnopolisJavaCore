@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Car car = new Car(2120, "Uaz", new Wheel(25, "225"));
 
-        String carObj = "Car";
+        String carObj = car.getClass().getSimpleName();
         serialize(car, carObj);
         Car car2 = (Car) deSerialize(carObj, Car.class);
 
@@ -37,10 +37,10 @@ public class Main {
     private static void serialize(Object object, String file) {
         try (ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(file))) {
             // Алгоритм копирования объекта
-            Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
+//            Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
             Field[] fields = object.getClass().getDeclaredFields();
 
-            serializator(object, parentFields, ous);
+//            serializator(object, parentFields, ous);
             serializator(object, fields, ous);
 
         } catch (IOException e) {
@@ -70,11 +70,12 @@ public class Main {
                 field.setAccessible(true);
 
                 Class<?> clazz = field.get(object).getClass();
-                if (clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number")) {
+                if (clazz.isPrimitive()
+                        || clazz.getSuperclass().getSimpleName().equals("Number")
+                        || Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)
+                ) {
                     ous.writeObject(field.get(object));
 
-                } else if (Arrays.asList(clazz.getInterfaces()).contains(Serializable.class)) {
-                    ous.writeObject(field.get(object));
                 } else {
                     serializeTwo(field.get(object), ous);
                 }
@@ -127,7 +128,7 @@ public class Main {
             Field[] parentFields = type.getSuperclass().getDeclaredFields();
             Field[] fields = type.getDeclaredFields();
 
-            deSerializator(obj, parentFields, ois);
+//            deSerializator(obj, parentFields, ois);
             deSerializator(obj, fields, ois);
 
             changeField.set(changeValue, obj);

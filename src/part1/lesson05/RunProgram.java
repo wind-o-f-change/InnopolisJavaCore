@@ -8,8 +8,6 @@ import part1.lesson05.enitities.Pet;
 import part1.lesson05.enitities.PetStore;
 import part1.lesson05.enitities.Sex;
 
-import java.util.UUID;
-
 /**
  * Create 01.05.2020
  *
