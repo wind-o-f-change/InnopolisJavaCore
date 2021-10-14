@@ -7,7 +7,7 @@ package part1.lesson08;
  */
 
 public class Car extends Entity {
-    String speed;
+    int speed;
     String name;
     Wheel wheel;
 
@@ -17,14 +17,40 @@ public class Car extends Entity {
 
     public Car(){}
 
-    public Car(String speed, String name, Wheel wheel) {
+    public Car(int speed, String name, Wheel wheel) {
         this.speed = speed;
         this.name = name;
         this.wheel = wheel;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
 
-    public Car(String speed, String name) {
+    public Car setSpeed(int speed) {
+        this.speed = speed;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Car setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Wheel getWheel() {
+        return wheel;
+    }
+
+    public Car setWheel(Wheel wheel) {
+        this.wheel = wheel;
+        return this;
+    }
+
+    public Car(int speed, String name) {
         this.speed = speed;
         this.name = name;
     }
@@ -33,11 +59,12 @@ public class Car extends Entity {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Car{");
         sb.append("\n\taverageField='").append(averageField).append('\'');
-        sb.append(", \n\tspeed='").append(speed).append('\'');
+        sb.append(", \n\tspeed=").append(speed);
         sb.append(", \n\tname='").append(name).append('\'');
         sb.append(", \n\twheel=").append(wheel);
         sb.append(", \n\textStr='").append(extStr).append('\'');
         sb.append(", \n\tmegaSuperEntityField='").append(megaSuperEntityField).append('\'');
+        sb.append(", \n\tsuperWheel=").append(superWheel);
         sb.append('}');
         return sb.toString();
     }

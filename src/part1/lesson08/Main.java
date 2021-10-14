@@ -13,7 +13,8 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Car car = new Car("2120", "Uaz", new Wheel(25, "225"));
+        Car car = new Car(2120, "Uaz", new Wheel(25, "225"));
+        car.setSuperWheel(new Wheel(25123, "огого скока"));
 
         System.out.println(car);
         System.out.println();
@@ -27,7 +28,7 @@ public class Main {
         Class superClass = clazz.getSuperclass();
 
         serializator(object, clazz.getDeclaredFields());
-        parentPrint(object, superClass, superClass.getDeclaredFields());
+        parentSerialize(object, superClass, superClass.getDeclaredFields());
     }
 
     private static void serializator(Object object, Field[] fields) {
@@ -52,7 +53,7 @@ public class Main {
         }
     }
 
-    private static <T> void parentPrint(T object, Class<?> clazz, Field[] fields) {
+    private static <T> void parentSerialize(T object, Class<?> clazz, Field[] fields) {
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
@@ -62,10 +63,12 @@ public class Main {
                 if (subClazz == String.class) {
                     String s = "@my val";
                     field.set(object, (s));
+                } else if (!(clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number"))) {
+                    serialize(field.get(object));
                 }
                 Class<?> superclass = clazz.getSuperclass();
                 if (superclass != null){
-                    parentPrint(object, superclass, superclass.getDeclaredFields());
+                    parentSerialize(object, superclass, superclass.getDeclaredFields());
                 }
             }
 

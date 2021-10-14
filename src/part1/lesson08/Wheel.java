@@ -28,4 +28,22 @@ public class Wheel {
                 ", width='" + width +
                 '}';
     }
+
+    public int getDiameter() {
+        return diameter;
+    }
+
+    public Wheel setDiameter(int diameter) {
+        this.diameter = diameter;
+        return this;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public Wheel setWidth(String width) {
+        this.width = width;
+        return this;
+    }
 }
