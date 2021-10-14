@@ -13,8 +13,8 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        Car car = new Car(2120, "Uaz", new Wheel(25, "225"));
-        car.setSuperWheel(new Wheel(25123, "огого скока"));
+        Some some = new Some("что - то", new SuperSome("super что - то"));
+        Car car = new Car(2120, "Uaz", new Wheel(25, "225", some));
 
         System.out.println(car);
         System.out.println();
