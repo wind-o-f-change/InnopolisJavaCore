@@ -6,6 +6,14 @@ package part1.lesson08;
  * @autor Evtushenko Anton
  */
 
-public class Entitity {
-    static String extStr = "Is extend field";
+public class Entitity extends AverageEntity {
+    public String extStr = "Is extend field";
+
+//    @Override
+//    public String toString() {
+//        final StringBuilder sb = new StringBuilder("Entitity{");
+//        sb.append("superPuperField='").append(averageField).append('\'');
+//        sb.append('}');
+//        return sb.toString();
+//    }
 }
