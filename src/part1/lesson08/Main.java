@@ -61,7 +61,7 @@ public class Main {
 
                 Class<?> subClazz = field.get(object).getClass();
                 if (subClazz == String.class) {
-                    String s = "@my val";
+                    String s = "@parent val";
                     field.set(object, (s));
                 } else if (!(clazz.isPrimitive() || clazz.getSuperclass().getSimpleName().equals("Number"))) {
                     serialize(field.get(object));

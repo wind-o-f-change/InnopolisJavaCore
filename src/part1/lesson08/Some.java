@@ -17,7 +17,7 @@ public class Some extends MegaSuperEntity2 {
         final StringBuilder sb = new StringBuilder("Some{");
         sb.append("megaSuperEntityField='").append(megaSuperEntityField).append('\'');
         sb.append(", someString='").append(someString).append('\'');
-        sb.append(", superSome=").append(superSome);
+        sb.append(", ").append(superSome);
         sb.append('}');
         return sb.toString();
     }
