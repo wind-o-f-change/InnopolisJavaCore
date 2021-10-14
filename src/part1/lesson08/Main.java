@@ -11,8 +11,11 @@ import java.util.Arrays;
  */
 
 public class Main {
+    /** Показывать ли историю посещения полей во время обхода */
+    static boolean isOnHistoryReflectionWork = false;
 
     public static void main(String[] args) {
+
         Some some = new Some("что - то", new SuperSome("super что - то"));
         Car car = new Car(2120, "Uaz", new Wheel(25, "225", some));
 
@@ -31,10 +34,12 @@ public class Main {
         parentSerialize(object, superClass, superClass.getDeclaredFields());
     }
 
-    private static void serializator(Object object, Field[] fields) {
+    private static <T> void serializator(T object, Field[] fields) {
+        if (isOnHistoryReflectionWork) System.out.println("serializator " + object.getClass().getSimpleName() + ": ");
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
+                if (isOnHistoryReflectionWork) System.out.println(field.getType().getSimpleName() + ": " + field.getName());
 
                 Class<?> clazz = field.get(object).getClass();
                 if (clazz == String.class) {
@@ -54,10 +59,11 @@ public class Main {
     }
 
     private static <T> void parentSerialize(T object, Class<?> clazz, Field[] fields) {
+        if (isOnHistoryReflectionWork) System.out.println("parentSerialize " + object.getClass().getSimpleName() + ": ");
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
-                System.out.println(clazz.getSimpleName() + ": " + field.getName());
+                if (isOnHistoryReflectionWork) System.out.println(field.getType().getSimpleName() + ": " + field.getName());
 
                 Class<?> subClazz = field.get(object).getClass();
                 if (subClazz == String.class) {
