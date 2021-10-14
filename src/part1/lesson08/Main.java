@@ -35,8 +35,8 @@ public class Main {
         Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
         Field[] fields = object.getClass().getDeclaredFields();
 
-        serializator(object, fields);
-        parentPrint(object, object.getClass(), parentFields);
+//        serializator(object, fields);
+        parentPrint(object, object.getClass().getSuperclass(), parentFields);
     }
 
 //    private static void serializeTwo(Object object) {
