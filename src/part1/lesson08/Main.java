@@ -1,8 +1,5 @@
 package part1.lesson08;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -18,35 +15,20 @@ public class Main {
     public static void main(String[] args) {
         Car car = new Car("2120", "Uaz", new Wheel(25, "225"));
 
-//        String carObj = "Car.txt";
-        serialize(car);
-//        Car car2 = (Car) deSerialize(carObj, Car.class);
-
         System.out.println(car);
-//        car.beep();
-//        car.wheel.print();
+        System.out.println();
+        serialize(car);
 
-//        System.out.println("\nIt's a copy of the Uaz\n\t" + car2);
-//        car2.beep();
-//        car2.wheel.print();
+        System.out.println('\n' + car.toString());
     }
 
     private static <T> void serialize(T object) {
-        Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
-        Field[] fields = object.getClass().getDeclaredFields();
+        Class clazz = object.getClass();
+        Class superClass = clazz.getSuperclass();
 
-//        serializator(object, fields);
-        parentPrint(object, object.getClass().getSuperclass(), parentFields);
+        serializator(object, clazz.getDeclaredFields());
+        parentPrint(object, superClass, superClass.getDeclaredFields());
     }
-
-//    private static void serializeTwo(Object object) {
-//
-//        Field[] parentFields = object.getClass().getSuperclass().getDeclaredFields();
-//        Field[] fields = object.getClass().getDeclaredFields();
-//
-//        serializator(object, parentFields);
-//        serializator(object, fields);
-//    }
 
     private static void serializator(Object object, Field[] fields) {
         try {
@@ -74,7 +56,7 @@ public class Main {
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
-                System.out.println(field.getName());
+                System.out.println(clazz.getSimpleName() + ": " + field.getName());
 
                 Class<?> subClazz = field.get(object).getClass();
                 if (subClazz == String.class) {
@@ -90,62 +72,6 @@ public class Main {
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static Object deSerialize(String file, Class<?> clazz) {
-        Object obj = null;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            obj = clazz.newInstance();
-
-            Field[] parentFields = clazz.getSuperclass().getDeclaredFields();
-            Field[] fields = clazz.getDeclaredFields();
-
-            deSerializator(obj, parentFields, ois);
-            deSerializator(obj, fields, ois);
-
-        } catch (IOException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
-        return obj;
-    }
-
-    private static void deSerializeTwo(Object changeValue, Field changeField, ObjectInputStream ois) {
-        try {
-            Class<?> type = changeField.getType();
-            Object obj = type.newInstance();
-
-            Field[] parentFields = type.getSuperclass().getDeclaredFields();
-            Field[] fields = type.getDeclaredFields();
-
-            deSerializator(obj, parentFields, ois);
-            deSerializator(obj, fields, ois);
-
-            changeField.set(changeValue, obj);
-        } catch (IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void deSerializator(Object obj, Field[] fields, ObjectInputStream ois) {
-        for (Field field : fields) {
-            field.setAccessible(true);
-
-            Class<?> o2Class = field.getType();
-            try {
-
-                if (o2Class == String.class) {
-                    field.set(obj, (String) ois.readObject());
-                } else if (field.getType().isPrimitive() || o2Class.getSuperclass().getSimpleName().equals("Number")) {
-                    field.set(obj, ois.readObject());
-                } else if (Arrays.asList(o2Class.getInterfaces()).contains(Serializable.class)) {
-                    field.set(obj, ois.readObject());
-                } else {
-                    deSerializeTwo(obj, field, ois);
-                }
-            } catch (IllegalAccessException | IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

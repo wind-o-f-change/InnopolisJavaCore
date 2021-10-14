@@ -6,7 +6,7 @@ package part1.lesson08;
  * @autor Evtushenko Anton
  */
 
-public class Entitity extends AverageEntity {
+public class Entity extends AverageEntity {
     public String extStr = "Is extend field";
 
 //    @Override

@@ -6,7 +6,7 @@ package part1.lesson08;
  * @autor Evtushenko Anton
  */
 
-public class Car extends Entitity {
+public class Car extends Entity {
     String speed;
     String name;
     Wheel wheel;
